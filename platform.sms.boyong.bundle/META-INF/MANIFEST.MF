@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bundle
+Bundle-SymbolicName: platform.sms.boyong.bundle
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.wiiy.sms.boyong.activator.BoYongActivator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.wiiy.external.service,
+ org.osgi.framework;version="1.3.0"
+Bundle-Vendor: wiiy
+Export-Package: com.wiiy.sms.boyong.service

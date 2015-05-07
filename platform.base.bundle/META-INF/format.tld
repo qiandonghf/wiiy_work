@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd">
+ <tlib-version>1.0</tlib-version>
+ <short-name>format</short-name>
+ <uri>http://www.wiiy.com/taglib/format</uri>
+ <tag>
+  <name>fileSize</name>
+  <tag-class>com.wiiy.commons.taglib.FileSizeTaglib</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+   <name>size</name>
+   <required>true</required>
+   <rtexprvalue>yes</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>unit</name>
+   <rtexprvalue>false</rtexprvalue>
+  </attribute>
+ </tag>
+ <tag>
+  <name>fileName</name>
+  <tag-class>com.wiiy.commons.taglib.FileNameTaglib</tag-class>
+  <body-content>empty</body-content>
+  <attribute>
+   <name>value</name>
+   <required>true</required>
+   <rtexprvalue>yes</rtexprvalue>
+  </attribute>
+ </tag>
+</taglib>

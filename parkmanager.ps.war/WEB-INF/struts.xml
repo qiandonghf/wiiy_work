@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</global-results>
+	</package>
+	<package name="ps" namespace="/" extends="root">
+		<action name="action" class="action">
+			<result name="service">web/service.jsp</result>
+		</action>
+	</package>
+</struts>

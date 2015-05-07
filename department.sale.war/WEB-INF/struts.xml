@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="rvalue" type="json1">
+				<param name="root">result.value</param>
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="login">/web/login.jsp</result>
+		</global-results>
+	</package>
+	<package name="sale" namespace="/" extends="root">
+	
+		<action name="registrationBook" class="registrationBookAction">
+			<result name="add">/web/registration/registration_add.jsp</result>
+			<result name="edit">/web/registration/registration_edit.jsp</result>
+			<result name="view">/web/registration/registration_view.jsp</result>
+		</action>
+	
+		<action name="contectInfo" class="contectInfoAction">
+			<result name="list">/web/contectInfo/contectInfo_list.jsp</result>
+			<result name="add">/web/contectInfo/contectInfo_add.jsp</result>
+			<result name="edit">/web/contectInfo/contectInfo_edit.jsp</result>
+			<result name="view">/web/contectInfo/contectInfo_view.jsp</result>
+		</action>
+		<action name="repeatedViste" class="repeatedVisteAction">
+			<result name="add">/web/contectInfo/repeatedViste_add.jsp</result>
+			<result name="edit">/web/contectInfo/repeatedViste_edit.jsp</result>
+			<result name="view">/web/contectInfo/repeatedViste_view.jsp</result>
+		</action>
+		
+		<action name="customer" class="customerAction">
+			<result name="add">/web/customer/customer_add.jsp</result>
+			<result name="edit">/web/customer/customer_edit.jsp</result>
+			<result name="view">/web/customer/customer_view.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="customerCategory" class="customerCategoryAction">
+			<result name="add">/web/customer/group_add.jsp</result>
+			<result name="edit">/web/customer/group_edit.jsp</result>
+		</action>
+		<action name="customerLabel" class="customerLabelAction">
+			<result name="addByCategoryId">/web/customer/label_add.jsp</result>
+			<result name="edit">/web/customer/label_edit.jsp</result>
+		</action>
+		<action name="customerLabelRef" class="customerLabelRefAction">
+		</action>
+		
+		<action name="contract" class="contractAction">
+			<result name="view">/web/contract/contract_view.jsp</result>
+			<result name="edit">/web/contract/contract_edit.jsp</result>
+			<result name="editById">/web/contract/contract_edit_by_id.jsp</result>
+			<result name="viewById">/web/contract/contract_view_by_id.jsp</result>
+		</action>
+		<action name="billPlanRent" class="billPlanRentAction">
+			<result name="view">/web/contract/billPlanRent_view.jsp</result>
+			<result name="edit">/web/contract/billPlanRent_edit.jsp</result>
+		</action>
+		<action name="contractAtt" class="contractAttAction">
+			<result name="view">/web/contract/contractAtt_view.jsp</result>
+			<result name="edit">/web/contract/contractAtt_edit.jsp</result>
+		</action>
+		<action name="billRent" class="billRentAction">
+			<result name="view">/web/contract/billRent_view.jsp</result>
+			<result name="edit">/web/contract/billRent_edit.jsp</result>
+		</action>
+		
+		<action name="plan" class="planAction">
+			<result name="add">/web/project/project_plan_add.jsp</result>
+			<result name="view">/web/project/project_plan_view.jsp</result>
+			<result name="edit">/web/project/project_plan_edit.jsp</result>
+		</action>
+		<action name="fact" class="factAction">
+			<result name="add">/web/project/project_fact_add.jsp</result>
+			<result name="view">/web/project/project_fact_view.jsp</result>
+			<result name="edit">/web/project/project_fact_edit.jsp</result>
+		</action>
+		<action name="project" class="projectAction">
+			<result name="view">/web/project/project_view.jsp</result>
+			<result name="edit">/web/project/project_edit.jsp</result>
+			<result name="contractAdd">/web/contract/contract_add_by_id.jsp</result>
+		</action>
+		<action name="residential" class="residentialAction">
+			<result name="roomSelect">/web/subscribe/room_selector.jsp</result>
+			<result name="list">/web/subscribe/subscribe_residential_list.jsp</result>
+			<result name="edit">/web/subscribe/subscribe_residential_edit.jsp</result>
+			<result name="view">/web/subscribe/subscribe_residential_view.jsp</result>
+		</action>
+	</package>
+</struts>

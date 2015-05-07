@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+	<osgi:reference id="osgiDataSource" interface="javax.sql.DataSource"/>
+  	<osgi:reference id="transactionManager">
+  		<osgi:interfaces>
+  			<value>org.springframework.transaction.support.ResourceTransactionManager</value>
+			<value>org.springframework.beans.factory.InitializingBean</value>
+  		</osgi:interfaces>
+  	</osgi:reference>
+  	
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">  
+		<!--这里是数据源的指定 指向你自己的dataSource -->  
+		<property name="dataSource" ref="osgiDataSource" />  
+		<property name="transactionManager" ref="transactionManager" />  
+		<!-- 设置数据库schema的更新方式 -->  
+		<property name="databaseSchemaUpdate" value="true" />  
+		<!-- 是否启动jobExecutor -->  
+		<property name="jobExecutorActivate" value="false" />  
+		<property name="createDiagramOnDeploy" value="true" />  
+		<property name="activityFontName" value="微软雅黑"/>
+		<property name="labelFontName" value="微软雅黑"/>
+		<!-- 
+•none: 忽略所有历史存档。这是流程执行时性能最好的状态，但没有任何历史信息可用。 
+•activity: 保存所有流程实例信息和活动实例信息。 在流程实例结束时, 最后一个流程实例中的最新的变量值将赋值给历史变量。 不会保存过程中的详细信息。
+•audit: 这个是默认值. 它保存所有流程实例信息, 活动信息, 保证所有的变量和提交的表单属性保持同步 这样所有用户交互信息都是可追溯的，可以用来审计。
+•full: 这个是最高级别的历史信息存档，同样也是最慢的。 这个级别存储发生在审核以及所有其它细节的信息, 主要是更新流程变量。
+--> 
+		<property name="history" value="audit" /> 
+		
+		
+		<property name="mailServerHost" value="mail.teco-tech.com" />
+    	<property name="mailServerPort" value="25" />
+		
+		
+		<!-- 自动部署就是自己自动部署流程 意思就是 我本来没流程啊 怎么多出来的流程 就是在这里 自动部署的，流程只有部署了 用户才可以走这个流程 
+		<property name="deploymentResources">  
+			<list>  
+				<value>classpath*:/deployments/*</value>  
+			</list>  
+		</property>  -->  
+		<!-- 自定义表单字段类型 这个很重要 很重要 你不用明白他是什么意思 他就是必须的 自己在自己的项目里加上这个类然后指向他 -->  
+		<property name="customFormTypes">
+	      <list>
+	        <bean class="org.activiti.explorer.form.UserFormType"/>
+	        <bean class="org.activiti.explorer.form.ProcessDefinitionFormType"/> 
+	        <bean class="org.activiti.explorer.form.MonthFormType"/>   
+	      </list>
+	    </property> 
+	</bean>  
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">  
+		<property name="processEngineConfiguration" ref="processEngineConfiguration" />  
+	</bean>  
+	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"/>  
+	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>  
+	<bean id="formService" factory-bean="processEngine" factory-method="getFormService"/>  
+	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>  
+	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"/>  
+	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>  
+	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/> 
+	
+	<osgi:service ref="repositoryService" auto-export="class-hierarchy"></osgi:service>
+	<osgi:service ref="runtimeService" interface="org.activiti.engine.RuntimeService"></osgi:service>
+	<osgi:service ref="formService" interface="org.activiti.engine.FormService"></osgi:service>
+	<osgi:service ref="identityService" interface="org.activiti.engine.IdentityService"></osgi:service>
+	<osgi:service ref="taskService" interface="org.activiti.engine.TaskService"></osgi:service>
+	<osgi:service ref="historyService" interface="org.activiti.engine.HistoryService"></osgi:service>
+	<osgi:service ref="managementService" interface="org.activiti.engine.ManagementService"></osgi:service>
+	
+  	
+</beans>

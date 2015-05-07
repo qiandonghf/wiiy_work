@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+	<constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="login">/views/login.jsp</result>
+		</global-results>
+	</package>
+	<package name="activiti" namespace="/" extends="root">
+		<action name="test1" class="testAction" method="test1">
+			<result name="index">index.jsp</result>
+		</action>
+		<action name="actlogin" class="acLoginAction">
+			<result name="index">/views/main/index.jsp</result>
+		</action>
+		<action name="leave" class="leaveAction">
+			<result name="apply">/views/oa/leave/leaveApply.jsp</result>
+			<result name="runningList">/views/oa/leave/running.jsp</result>
+			<result name="taskList">/views/oa/leave/taskList.jsp</result>
+			<result name="finishedList">/views/oa/leave/finished.jsp</result>
+		</action>
+		<action name="workflow" class="workflowAction">
+			<result name="process-list">/views/workflow/process-list.jsp</result>
+		</action>
+		<action name="processinstance" class="processInstanceAction">
+			<result name="running-manage">/views/workflow/running-manage.jsp</result>
+		</action>
+		
+	</package>
+</struts>

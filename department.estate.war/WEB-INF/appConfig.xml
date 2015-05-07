@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appConfig>
+	<config key="propertyContect" label="物业部门负责人">
+		<parameter key="name" label="负责人" value="1" render="select_user"/>
+    </config>
+    <config key="propertyRemind" label="物业保修单递交提醒">
+    	<parameter key="email" label="邮件" value="active" render="radio">
+        	<option value="active" label="开启"/>
+        	<option value="inactive" label="关闭"/>
+        </parameter>
+        <parameter key="sms" label="短信" value="inactive" render="radio">
+        	<option value="active" label="开启"/>
+        	<option value="inactive" label="关闭"/>
+        </parameter>
+    </config>
+    <config key="contractDueRemindDays" label="合同到期提醒提前天数">
+        <parameter key="day" label="天数" value="15" render="text"/>
+    </config>
+</appConfig>

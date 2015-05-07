@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="rvalue" type="json1">
+				<param name="root">result.value</param>
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="login">/web/login.jsp</result>
+		</global-results>
+	</package>
+	<package name="estate" namespace="/" extends="root">
+		<action name="propertyFix" class="propertyFixAction">
+			<result name="listAll">/web/property/property_repair_list.jsp</result>
+			<result name="add">/web/property/property_repair_add.jsp</result>
+			<result name="edit">/web/property/property_repair_edit.jsp</result>
+			<result name="view">/web/property/property_repair_view.jsp</result>
+			<result name="handle">/web/property/property_repair_handle.jsp</result>
+			<result name="handleDesktop">/web/desktop/property_repair_handle_desktop.jsp</result>
+			<result name="serviceList">/web/property/property_repair_serviceList.jsp</result>
+			<result name="workBenchPropertyFixList">/web/desktop/propertyFix_list.jsp</result>
+			<result name="customerSelect">/web/property/customer_selector.jsp</result>
+			<result name="roomSelect">/web/property/room_selector.jsp</result>
+		</action>
+		<action name="complaint" class="complaintAction">
+			<result name="listAll">/web/property/complaint_list.jsp</result>
+			<result name="edit">/web/property/complaint_edit.jsp</result>
+			<result name="view">/web/property/complaint_view.jsp</result>
+			<result name="handle">/web/property/complaint_handle.jsp</result>
+			<result name="workBenchComplaint">/web/desktop/complaint_list.jsp</result>
+		</action>
+		<action name="fixFee" class="fixFeeAction">
+			<result name="add">/web/property/fixFee_add.jsp</result>
+			<result name="view">/web/property/fixFee_view.jsp</result>
+			<result name="edit">/web/property/fixFee_edit.jsp</result>
+		</action>
+		<action name="parkingFee" class="parkingFeeAction">
+			<result name="add">/web/parkingFee/parkingFee_add.jsp</result>
+			<result name="view">/web/parkingFee/parkingFee_view.jsp</result>
+			<result name="edit">/web/parkingFee/parkingFee_edit.jsp</result>
+			<result name="select">/web/parkingFee/parkingManage_selector.jsp</result>
+			
+		</action>
+		<action name="supply" class="supplyAction">
+			<result name="check">/web/chiefadmin/OfficeSupplies_view.jsp</result>
+			<result name="add">/web/chiefadmin/OfficeSupplies_add.jsp</result>
+			<result name="list">/web/chiefadmin/OfficeSupplies_list.jsp</result>
+			<result name="edit">/web/chiefadmin/OfficeSupplies_edit.jsp</result>
+			<result name="view">/web/chiefadmin/OfficeSupplies_list.jsp</result>
+			<result name="select">/web/chiefadmin/Supply_selector.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="supplyCategory" class="supplyCategoryAction">
+			<result name="list">/web/chiefadmin/SupplyCategory_list.jsp</result>
+			<result name="add">/web/chiefadmin/SupplyCategory_add.jsp</result>
+			<result name="edit">/web/chiefadmin/SupplyCategory_edit.jsp</result>
+			<result name="addByCategoryId">/web/chiefadmin/SupplyCategory_addByParentId.jsp</result>
+		</action>
+
+		<action name="supplyStockIn" class="supplyStockInAction">
+			<result name="add">/web/chiefadmin/Office_supplies_storage_add.jsp</result>
+			<result name="list">/web/chiefadmin/Office_supplies_storage_list.jsp</result>
+			<result name="edit">/web/chiefadmin/Office_supplies_storage_edit.jsp</result>
+			<result name="view">/web/chiefadmin/Office_supplies_storage_view.jsp</result>
+			<result name="viewAll">/web/chiefadmin/Office_supplies_storage_view2.jsp</result>
+			<result name="select">/web/chiefadmin/SupplyPurchaseForm_select.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="supplyApply" class="supplyApplyAction">
+			<result name="list">/web/chiefadmin/Office_supplies_sq.jsp</result>
+			<result name="edit">/web/chiefadmin/Office_supplies_sq_edit.jsp</result>
+			<result name="view">/web/chiefadmin/Office_supplies_sq_view.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="supplyPurchase" class="supplyPurchaseAction">
+			<result name="list">/web/chiefadmin/Office_supplies_purchase.jsp</result>
+			<result name="edit">/web/chiefadmin/Office_supplies_purchase_edit.jsp</result>
+			<result name="view">/web/chiefadmin/Office_supplies_purchase_view.jsp</result>
+		</action>
+		<action name="meterLabel" class="meterLabelAction">
+			<result name="list">/web/property/meterLabel_list.jsp</result>
+			<result name="waterView">/web/property/meterLabel_basicInfo.jsp</result>
+			<result name="eleView">/web/property/meterLabel_basicInfoEle.jsp</result>
+			<result name="edit">/web/property/meterLabel_edit.jsp</result>
+		</action>
+		
+		<action name="meter" class="meterAction">
+			<result name="addWaterMeter">/web/property/meter_water_add.jsp</result>
+			<result name="addEleMeter">/web/property/meter_ele_add.jsp</result>
+			<result name="addGasMeter">/web/property/meter_gas_add.jsp</result>
+			<result name="waterEdit">/web/property/meter_water_edit.jsp</result>
+			<result name="eleEdit">/web/property/meter_ele_edit.jsp</result>
+			<result name="waterView">/web/property/meter_water_view.jsp</result>
+			<result name="eleView">/web/property/meter_ele_view.jsp</result>
+			<result name="multiSelect">/web/property/meter_multiple_select.jsp</result>
+		</action>
+		
+		<action name="meterLabelRecord" class="meterLabelRecordAction">
+			<result name="printEle">/web/property/meterLabel_record_printEle.jsp</result>
+			<result name="printWater">/web/property/meterLabel_record_printWater.jsp</result>
+			<result name="printEleFee">/web/property/meterLabel_record_printEleFee.jsp</result>
+			<result name="printWaterFee">/web/property/meterLabel_record_printWaterFee.jsp</result>
+			<result name="genarateReport">/web/property/meterLabel_record_genarateRecord.jsp</result>
+			<result name="watergenarateReport">/web/property/meterLabel_record_wgr.jsp</result>
+			<result name="waterView">/web/property/meterLabelRecord_waterView.jsp</result>
+			<result name="EleView">/web/property/meterLabelRecord_eleView.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="supplyPurchaseForm" class="supplyPurchaseFormAction">
+			<result name="view">/web/chiefadmin/Office_subscribe_view.jsp</result>
+			<result name="edit">/web/chiefadmin/Office_subscribe_edit.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>	
+		</action>
+		
+		<action name="supplyPurchaseConfig" class="supplyPurchaseConfigAction">
+			<result name="add">/web/chiefadmin/Office_subscribe_add.jsp</result>
+		<!-- 	<result name="view">/web/chiefadmin/Office_subscribe_view.jsp</result>
+			<result name="edit">/web/chiefadmin/Office_subscribe_edit.jsp</result> -->
+		</action>
+		
+		<action name="selfMeterLabel" class="selfMeterLabelAction">
+			<result name="list">/web/property/selfMeterLabel_list.jsp</result>
+			<result name="view">/web/property/selfMeterLabel_view.jsp</result>
+			<result name="edit">/web/property/selfMeterLabel_edit.jsp</result>
+		</action>
+		<action name="selfLabelRecord" class="selfLabelRecordAction">
+			<result name="print">/web/property/selfLabel_record_print.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="feeShare" class="feeShareAction">
+			<result name="add">/web/property/feeShare_add.jsp</result>
+			<result name="edit">/web/property/feeShare_edit.jsp</result>
+		</action>
+		<action name="roomMeterFee" class="roomMeterFeeAction">
+			<result name="edit">/web/property/room_listmeter_edit.jsp</result>
+		</action>
+		<action name="contractAgreementAtt" class="contractAgreementAttAction"></action>
+		<action name="contractAgreement" class="contractAgreementAction">
+			<result name="edit">/web/contract/contractAgreement_edit.jsp</result>
+			<result name="view">/web/contract/contractAgreement_view.jsp</result>
+		</action>
+		<action name="contract" class="contractAction">
+			<result name="addEstateBillRent">/web/contract/billPlanRent_addByRoomName_estate.jsp</result>
+			<result name="estateDesktop">/web/desktop/estate_contract_desktop.jsp</result>
+			<result name="rentPrediction">/web/contract/billPlanRent_rentPredict.jsp</result>
+			<result name="addBillRent">/web/contract/billPlanRent_addByRoomName.jsp</result>
+			<result name="dueRemind">/web/desktop/contract_dueRemind.jsp</result>
+			<result name="simpleViewNetwork">/web/contract/contract_simpleView_network.jsp</result>
+			<result name="simpleViewRent">/web/contract/contract_simpleView_rent.jsp</result>
+			<result name="customerContractList">/web/contract/customerContractList.jsp</result>
+			<result name="listByCustomerId">/web/contract/contract_listByCustomerId.jsp</result>
+			<result name="workBenchContractEdit1">/web/contract/contract_workbench_edit_rent.jsp</result>
+			<result name="workBenchContractEdit2">/web/contract/contract_workbench_edit_rent2.jsp</result>
+			<result name="workBenchContractEdit3">/web/contract/contract_workbench_edit_rent3.jsp</result>
+			<result name="editrent">/web/contract/contract_edit_rent.jsp</result>
+			<result name="editrent2">/web/contract/contract_edit_rent2.jsp</result>
+			<result name="editrent3">/web/contract/contract_edit_rent3.jsp</result>
+			<result name="estateEdit">/web/contract/contract_estate_edit.jsp</result>
+			<result name="editnetwork">/web/contract/contract_edit_network.jsp</result>
+			<result name="viewrent">/web/contract/contract_view_rent.jsp</result>
+			<result name="viewrent2">/web/contract/contract_view_rent2.jsp</result>
+			<result name="viewrent3">/web/contract/contract_view_rent3.jsp</result>
+			<result name="estateView">/web/contract/contract_estate_view.jsp</result>
+			<result name="viewnetwork">/web/contract/contract_view_network.jsp</result>
+			<result name="relet">/web/contract/contract_relet.jsp</result>
+			<result name="subtract">/web/contract/contract_subtract.jsp</result>
+			<result name="surrender">/web/contract/contract_surrender.jsp</result>
+			<result name="addBillRentAuto">/web/contract/billPlanRentAuto_addByRoomName.jsp</result>
+			<result name="listByEstateCostDetail">/web/forms/estateCostDetail_form.jsp</result>
+			<result name="contractDetail">/web/forms/estateContract_form.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="print_zfqy">/web/contract/contract_print_zfqy.jsp</result>
+			<result name="print_fzfqy">/web/contract/contract_print_fzfqy.jsp</result>
+			<result name="print_kdwjrxys">/web/contract/contract_print_kdwjrxys.jsp</result>
+			<result name="print_zcqlxsqy">/web/contract/contract_print_zcqlxsqy.jsp</result>
+			<result name="print_zcqzfqy">/web/contract/contract_print_zcqzfqy.jsp</result>
+			<result name="print" type="stream"> 
+				<param name="contentType">application/vnd.msword </param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="subjectRentEdit">/web/contract/subjectRent_edit.jsp</result>
+			<result name="subjectRentView">/web/contract/subjectRent_view.jsp</result>
+		</action>
+		<action name="billPlanRent" class="billPlanRentAction">
+			<result name="checkoutListBillPlanRent">/web/bill/bill_checkout_list_billPlanRent.jsp</result>
+			<result name="add">/web/contract/billPlanRent_add.jsp</result>
+			<result name="addEstate">/web/contract/billPlanRent_add_estate.jsp</result>
+			<result name="edit">/web/contract/billPlanRent_edit.jsp</result>
+			<result name="view">/web/contract/billPlanRent_view.jsp</result>
+			<result name="autoGenerate">/web/contract/billPlanRent_generatePreview.jsp</result>
+			<result name="billCostDetail">/web/forms/estateCostDetail_form.jsp</result>
+		</action>
+		<action name="contractTemplate" class="contractTemplateAction">
+			<result name="edit">/web/contract/contractTemplate_edit.jsp</result>
+		</action>
+		<action name="contractModifyLog" class="contractModifyLogAction">
+			<result name="view">/web/contract/contractModifyLog_view.jsp</result>
+		</action>
+		<action name="contractAtt" class="contractAttAction">
+			<result name="edit">/web/contract/contractAtt_edit.jsp</result>
+		</action>
+		<action name="contractMemo" class="contractMemoAction">
+			<result name="edit">/web/contract/contractMemo_edit.jsp</result>
+			<result name="view">/web/contract/contractMemo_view.jsp</result>
+		</action>
+		<action name="deposit" class="depositAction">
+			<result name="view">/web/contract/deposit_view.jsp</result>
+			<result name="edit">/web/contract/deposit_edit.jsp</result>
+			<result name="add">/web/contract/deposit_add.jsp</result>
+		</action>
+		
+		<action name="parkingManage" class="parkingManageAction">
+			<result name="view">/web/property/parkingManage_view.jsp</result>
+			<result name="edit">/web/property/parkingManage_edit.jsp</result>
+			<result name="select">/web/parkingFee/parking_selector.jsp</result>
+		</action>
+		<action name="garage" class="garageAction">
+			<result name="edit">/web/property/garage_edit.jsp</result>
+		</action>
+		<action name="vehicleManagement" class="vehicleManagementAction">
+			<result name="add">/web/property/vehicle_add.jsp</result>
+			<result name="edit">/web/property/vehicle_edit.jsp</result>
+			<result name="view">/web/property/vehicle_view.jsp</result>
+			<result name="select">/web/parkingFee/parkingManage_selector.jsp</result>
+		</action>
+		
+		<action name="deviceManagement" class="deviceManagementAction">
+			<result name="add">/web/property/device_add.jsp</result>
+			<result name="list">/web/property/device_list.jsp</result>
+			<result name="edit">/web/property/device_edit.jsp</result>
+			<result name="view">/web/property/device_view.jsp</result>
+		</action>
+		<action name="deviceMaintenance" class="deviceMaintenanceAction">
+			<result name="add">/web/property/deviceMaintenance_add.jsp</result>
+			<result name="edit">/web/property/deviceMaintenance_edit.jsp</result>
+			<result name="view">/web/property/deviceMaintenance_view.jsp</result>
+		</action>
+	
+		<action name="devicePatrol" class="devicePatrolAction">
+			<result name="add">/web/property/devicePatrol_add.jsp</result>
+			<result name="edit">/web/property/devicePatrol_edit.jsp</result>
+			<result name="view">/web/property/devicePatrol_view.jsp</result>
+		</action>
+		
+		<action name="deviceYearly" class="deviceYearlyAction">
+			<result name="add">/web/property/deviceYearly_add.jsp</result>
+			<result name="edit">/web/property/deviceYearly_edit.jsp</result>
+			<result name="view">/web/property/deviceYearly_view.jsp</result>
+		</action>
+		
+		<action name="deviceWorkOrder" class="deviceWorkOrderAction">
+			<result name="add">/web/property/deviceWorkOrder_add.jsp</result>
+			<result name="edit">/web/property/deviceWorkOrder_edit.jsp</result>
+			<result name="view">/web/property/deviceWorkOrder_view.jsp</result>
+		</action>
+		<action name="subjectRent" class="subjectRentAction">
+		</action>
+		
+		<!-- 水电表抄表 费用报表 -->
+		<action name="meterLabelReport" class="meterLabelReportAction">
+		</action>
+	</package>
+</struts>

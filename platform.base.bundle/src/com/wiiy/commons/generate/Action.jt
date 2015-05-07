@@ -1,0 +1,99 @@
+package ${parentPackage}.action;
+
+import java.util.List;
+
+import com.wiiy.commons.action.JqGridBaseAction;
+import com.wiiy.commons.util.BeanUtil;
+import com.wiiy.hibernate.Filter;
+import com.wiiy.hibernate.Result;
+
+<#list importPackages as importPackage> 
+import ${importPackage};
+</#list>
+
+/**
+ * @author my
+ */
+public class ${className}Action extends JqGridBaseAction<${className}>{
+	
+	private ${className}Service ${variableName}Service;
+	private Result result;
+	private ${className} ${variableName};
+	private Long id;
+	private String ids;
+	
+	
+	public String save(){
+		result = ${variableName}Service.save(${variableName});
+		return JSON;
+	}
+	
+	public String view(){
+		result = ${variableName}Service.getBeanById(id);
+		return VIEW;
+	}
+	
+	public String edit(){
+		result = ${variableName}Service.getBeanById(id);
+		return EDIT;
+	}
+	
+	public String update(){
+		${className} dbBean = ${variableName}Service.getBeanById(${variableName}.getId()).getValue();
+		BeanUtil.copyProperties(${variableName}, dbBean);
+		result = ${variableName}Service.update(dbBean);
+		return JSON;
+	}
+	
+	public String delete(){
+		if(id!=null){
+			result = ${variableName}Service.deleteById(id);
+		} else if(ids!=null){
+			result = ${variableName}Service.deleteByIds(ids);
+		}
+		return JSON;
+	}
+	
+	public String list(){
+		return refresh(new Filter(${className}.class));
+	}
+	
+	@Override
+	protected List<${className}> getListByFilter(Filter fitler) {
+		return ${variableName}Service.getListByFilter(fitler).getValue();
+	}
+	
+	
+	public ${className} get${className}() {
+		return ${variableName};
+	}
+
+	public void set${className}(${className} ${variableName}) {
+		this.${variableName} = ${variableName};
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+
+	public void set${className}Service(${className}Service ${variableName}Service) {
+		this.${variableName}Service = ${variableName}Service;
+	}
+	
+	public Result getResult() {
+		return result;
+	}
+	
+}

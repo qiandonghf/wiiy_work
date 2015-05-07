@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appConfig>
+	<config key="rentoffContract" label="退租合同">
+    	<parameter key="time" label="多少天内" value="30" render="text"/>
+    </config>
+	<config key="reletContract" label="续租合同">
+    	<parameter key="time" label="多少天内" value="30" render="text"/>
+    </config>
+    
+    <config key="billCheckoutForecastDay" label="出帐检测天数">
+        <parameter key="rent" label="物业租金" value="30" render="text"/>
+        <parameter key="deposit" label="押金" value="30" render="text"/>
+        <parameter key="facility" label="自定义费用" value="30" render="text"/>
+    </config>
+</appConfig>

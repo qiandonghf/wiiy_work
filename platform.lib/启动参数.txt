@@ -1,0 +1,90 @@
+----20140808-------解决basePath问题
+-DrootLocation=http://127.0.0.1:92
+
+
+----20140714-------解决8221死机问题
+
+java -Xms256m -Xmx512m -XX:PermSize=128M -XX:MaxNewSize=128M -XX:MaxPermSize=512M -Dorg.osgi.framework.system.packages.extra=com.sun.xml.internal.ws.developer,com.sun.xml.internal.ws,com.sun.xml.internal.ws.api.message -Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true -DhttpPort=8221 -Dsun.rmi.transport.tcp.responseTimeout=3000 -Dsun.rmi.transport.tcp.readTimeout=3000 -Dsun.rmi.transport.connectionTimeout=3000 -Dsun.rmi.transport.proxy.connectTimeout=3000 -Dsun.rmi.transport.tcp.handshakeTimeout=3000 -Djava.rmi.server.hostname=61.175.133.204 -DrmiPort=8220 -DrmiServerPort=8112 -DrmiDataPort=8419 -DrmiHostIp=61.175.133.204 -DrmiServerIp=58.215.78.148 -Dorg.springframework.osgi.web.deployer.tomcat.workspace=C:/hotdeploy/pm_8221/ -Dosgi.noShutdown=true  -jar org.eclipse.osgi_3.7.2.v20120110-1415.jar -console -Dfile.encoding=utf-8 -Dlog4j.configuration=file:/D:/workspacePM/platform.log4j.config/log4j.xml 
+
+-----20140609----
+
+
+-Declipse.ignoreApp=true -Dosgi.noShutdown=true
+-Dosgi.clean=true
+-DhttpPort=92
+-Dsun.rmi.transport.tcp.responseTimeout=3000
+-Dsun.rmi.transport.tcp.readTimeout=3000
+-Dsun.rmi.transport.connectionTimeout=3000
+-Dsun.rmi.transport.proxy.connectTimeout=3000
+-Dsun.rmi.transport.tcp.handshakeTimeout=3000
+-DrootLocation=http://127.0.0.1:92
+-DrmiPort=8111
+-DrmiServerPort=8111
+-DrmiDataPort=8400
+-DrmiHostIp=192.168.1.5
+-DrmiServerIp=58.215.78.148
+-Djava.rmi.server.hostname=58.215.78.148
+-Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true
+-Dorg.springframework.osgi.web.deployer.tomcat.workspace=D:/workspacePM/
+-Dlog4j.configuration=file:/D:/workspacePM/platform.log4j.config/log4j.xml
+-Xms256m -Xmx512m -XX:MaxNewSize=256m -XX:MaxPermSize=256m
+
+------------------
+
+
+-Declipse.ignoreApp=true -Dosgi.noShutdown=true
+-Dosgi.clean=true
+-Djava.rmi.server.hostname=115.205.237.43 
+-Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true
+-Dorg.springframework.osgi.web.deployer.tomcat.workspace=D:/workspace/
+-Dlog4j.configuration=file:/D:/workspace/platform.log4j.config/log4j.xml
+
+
+
+-Declipse.ignoreApp=true -Dosgi.noShutdown=true
+-Dosgi.clean=true Djava.rmi.server.hostname=58.215.78.148 -DrmiPort=8111 -DrmiServerPort=8111
+-DrmiDataPort=8400 -DrmiHostIp=192.168.1.206 -DrmiServerIp=58.215.78.148
+-Dfile.encoding=utf-8
+-Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true
+-Dorg.springframework.osgi.web.deployer.tomcat.workspace=D:/workspace/
+-Dlog4j.configuration=file:/D:/workspace/platform.log4j.config/log4j.xml
+
+
+-Declipse.ignoreApp=true -Dosgi.noShutdown=true
+-Dosgi.clean=true -Djava.rmi.server.hostname=58.215.78.148 -DrmiPort=8111 -DrmiServerPort=8111
+-DrmiDataPort=8400 -DrmiHostIp=115.192.120.162 -DrmiServerIp=58.215.78.148
+-Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true
+-Dorg.springframework.osgi.web.deployer.tomcat.workspace=D:/workspace/
+-Dlog4j.configuration=file:/D:/workspace/platform.log4j.config/log4j.xml
+-Djava.security.policy=file:D:/workspace/parkmanager.edi.war/policy.txt -Djava.rmi.server.codebase=file:.\
+-Xms256m -Xmx700m -XX:PermSize=128m -XX:MaxPermSize=256m
+
+-vmargs
+
+
+-Declipse.ignoreApp=true 
+-Dosgi.noShutdown=true 
+-Dosgi.clean=true 
+-Djava.rmi.server.hostname=58.215.78.148 
+-DrmiPort=8111 -DrmiServerPort=8111
+-DrmiDataPort=8400 
+-DrmiHostIp=192.168.1.206 
+-DrmiServerIp=58.215.78.148
+-Dfile.encoding=utf-8
+-Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true
+-Dorg.springframework.osgi.web.deployer.tomcat.workspace=D:/workspace/
+-Dlog4j.configuration=file:/D:/workspace/platform.log4j.config/log4j.xml
+-Xms256m -Xmx700m -XX:PermSize=128m -XX:MaxPermSize=256m
+
+
+
+-- jonathan
+
+-Declipse.ignoreApp=true -Dosgi.noShutdown=true
+-Dosgi.clean=true
+-DhttpPort=92
+-DrootLocation=http://127.0.0.1:92
+-Dorg.springframework.osgi.web.deployer.tomcat.hotdeploy=true
+-Dorg.springframework.osgi.web.deployer.tomcat.workspace=D:/workspace/yuhua/
+-Dlog4j.configuration=file:/D:/workspace/yuhua/platform.log4j.config/log4j.xml
+-Xms256m -Xmx512m -XX:MaxNewSize=256m -XX:MaxPermSize=256m

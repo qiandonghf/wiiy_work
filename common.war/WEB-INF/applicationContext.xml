@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+ 	<osgi:reference id="sessionService" interface="com.wiiy.hibernate.SessionService"/>
+ 	
+ 	<!-- <bean id="customerDao" class="com.wiiy.park.dao.CustomerDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerService" class="com.wiiy.park.service.impl.CustomerServiceImpl">
+		<property name="customerDao" ref="customerDao"></property>
+	</bean> -->
+ 	
+ 	<bean id="buildingDao" class="com.wiiy.park.dao.BuildingDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="buildingService" class="com.wiiy.park.service.impl.BuildingServiceImpl">
+		<property name="buildingDao" ref="buildingDao"></property>
+	</bean>
+	<bean id="buildingAction" class="com.wiiy.park.action.BuildingAction" scope="prototype">
+		<property name="buildingService" ref="buildingService"></property>
+		<property name="parkService" ref="parkService"></property>
+		<property name="roomService" ref="roomService"></property>
+		<property name="statisticService" ref="statisticService"></property>
+	</bean>
+ 	
+ 	
+ 	<bean id="parkDao" class="com.wiiy.park.dao.ParkDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="parkService" class="com.wiiy.park.service.impl.ParkServiceImpl">
+		<property name="parkDao" ref="parkDao"></property>
+	</bean>
+	<bean id="parkAction" class="com.wiiy.park.action.ParkAction" scope="prototype">
+		<property name="buildingService" ref="buildingService"></property>
+		<property name="parkService" ref="parkService"></property>
+	</bean>
+	
+	<bean id="roomDao" class="com.wiiy.park.dao.RoomDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomService" class="com.wiiy.park.service.impl.RoomServiceImpl">
+		<property name="roomDao" ref="roomDao"></property>
+	</bean>
+	<bean id="roomAction" class="com.wiiy.park.action.RoomAction" scope="prototype">
+		<property name="roomService" ref="roomService"></property>
+		<property name="roomAttService" ref="roomAttService"></property>
+		<property name="buildingService" ref="buildingService"></property>
+		<property name="floorService" ref="floorService"></property>
+		<property name="parkService" ref="parkService"></property>
+	</bean>
+	
+	<bean id="roomAttDao" class="com.wiiy.park.dao.RoomAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomAttService" class="com.wiiy.park.service.impl.RoomAttServiceImpl">
+		<property name="roomAttDao" ref="roomAttDao"></property>
+		<property name="roomService" ref="roomService"></property>
+	</bean>
+	<bean id="roomAttAction" class="com.wiiy.park.action.RoomAttAction" scope="prototype">
+		<property name="roomAttService" ref="roomAttService"></property>
+	</bean>	
+	
+	<bean id="floorDao" class="com.wiiy.park.dao.FloorDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="floorService" class="com.wiiy.park.service.impl.FloorServiceImpl">
+		<property name="floorDao" ref="floorDao"></property>
+	</bean>
+	<bean id="floorAction" class="com.wiiy.park.action.FloorAction" scope="prototype">
+		<property name="floorService" ref="floorService"></property>
+		<property name="buildingService" ref="buildingService"></property>
+		<property name="roomService" ref="roomService"></property>
+	</bean>
+	
+ 	<bean id="roomChangeLogAction" class="com.wiiy.park.action.RoomChangeLogAction" scope="prototype">
+		<property name="roomChangeLogService" ref="roomChangeLogService"></property>
+	</bean>
+	<bean id="roomChangeLogService" class="com.wiiy.park.service.impl.RoomChangeLogServiceImpl">
+		<property name="roomChangeLogDao" ref="roomChangeLogDao"></property>
+	</bean>
+	<bean id="roomChangeLogDao" class="com.wiiy.park.dao.RoomChangeLogDao">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+	
+	<bean id="roomFeeDao" class="com.wiiy.park.dao.RoomFeeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomFeeService" class="com.wiiy.park.service.impl.RoomFeeServiceImpl">
+		<property name="roomFeeDao" ref="roomFeeDao"></property>
+	</bean>
+	<bean id="roomFeeAction" class="com.wiiy.park.action.RoomFeeAction" scope="prototype">
+		<property name="roomFeeService" ref="roomFeeService"></property>
+		<property name="roomService" ref="roomService"></property>
+	</bean>
+	
+	<bean id="roomHistoryDao" class="com.wiiy.park.dao.RoomHistoryDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomHistoryService" class="com.wiiy.park.service.impl.RoomHistoryServiceImpl">
+		<property name="roomHistoryDao" ref="roomHistoryDao"></property>
+	</bean>
+	<bean id="roomHistoryAction" class="com.wiiy.park.action.RoomHistoryAction" scope="prototype">
+		<property name="roomHistoryService" ref="roomHistoryService"></property>
+	</bean>
+	
+	<bean id="roomMemoAction" class="com.wiiy.park.action.RoomMemoAction" scope="prototype">
+		<property name="roomMemoService" ref="roomMemoService"></property>
+	</bean>
+	<bean id="roomMemoService" class="com.wiiy.park.service.impl.RoomMemoServiceImpl">
+		<property name="roomMemoDao" ref="roomMemoDao"></property>
+	</bean>
+	<bean id="roomMemoDao" class="com.wiiy.park.dao.RoomMemoDao">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+ 	
+	<bean id="roomMonitorDao" class="com.wiiy.park.dao.RoomMonitorDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomMonitorService" class="com.wiiy.park.service.impl.RoomMonitorServiceImpl">
+		<property name="roomMonitorDao" ref="roomMonitorDao"></property>
+	</bean>
+	<bean id="roomMonitorAction" class="com.wiiy.park.action.RoomMonitorAction" scope="prototype">
+		<property name="roomMonitorService" ref="roomMonitorService"></property>
+	</bean>
+	
+	<bean id="statisticService" class="com.wiiy.park.service.impl.StatisticServiceImpl">
+		<!-- <property name="customerDao" ref="customerDao"></property> -->
+		<property name="parkDao" ref="parkDao"></property>
+	</bean>
+	
+	<bean id="statisticAction" class="com.wiiy.park.action.StatisticAction" scope="prototype">
+		<property name="statisticService" ref="statisticService"></property>
+	</bean>
+	
+	<!-- 账单-->
+	<bean id="billDao" class="com.wiiy.park.dao.BillDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billService" class="com.wiiy.park.service.impl.BillServiceImpl">
+		<property name="billDao" ref="billDao"></property>
+	</bean>
+	<bean id="billAction" class="com.wiiy.park.action.BillAction" scope="prototype">
+		<property name="billService" ref="billService"></property>
+		<property name="billTypeService" ref="billTypeService"></property>
+		<property name="statisticService" ref="statisticService"></property>
+		<!-- <property name="customerService" ref="customerService"></property> -->
+		<property name="buildingService" ref="buildingService"></property>
+	</bean>
+	
+	<!-- 账单类型 -->
+	<bean id="billTypeDao" class="com.wiiy.park.dao.BillTypeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billTypeService" class="com.wiiy.park.service.impl.BillTypeServiceImpl">
+		<property name="billTypeDao" ref="billTypeDao"></property>
+	</bean>
+	<bean id="billTypeAction" class="com.wiiy.park.action.BillTypeAction" scope="prototype">
+		<property name="billTypeService" ref="billTypeService"></property>
+	</bean>
+	<!-- 账单催缴 -->
+	<bean id="billRemindDao" class="com.wiiy.park.dao.BillRemindDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billRemindService" class="com.wiiy.park.service.impl.BillRemindServiceImpl">
+		<property name="billRemindDao" ref="billRemindDao"></property>
+	</bean>
+	<bean id="billRemindAction" class="com.wiiy.park.action.BillRemindAction" scope="prototype">
+		<property name="billRemindService" ref="billRemindService"></property>
+	</bean>
+	
+</beans>

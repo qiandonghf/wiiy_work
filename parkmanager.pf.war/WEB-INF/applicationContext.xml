@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+	
+	<osgi:reference id="sessionService" interface="com.wiiy.hibernate.SessionService"/>
+	
+	<osgi:reference id="repositoryService" interface="org.activiti.engine.impl.RepositoryServiceImpl"></osgi:reference>
+	<osgi:reference id="runtimeService" interface="org.activiti.engine.RuntimeService"></osgi:reference>
+	<osgi:reference id="formService" interface="org.activiti.engine.FormService"></osgi:reference>
+	<osgi:reference id="identityService" interface="org.activiti.engine.IdentityService"></osgi:reference>
+	<osgi:reference id="taskService" interface="org.activiti.engine.TaskService"></osgi:reference>
+	<osgi:reference id="historyService" interface="org.activiti.engine.HistoryService"></osgi:reference>
+	<osgi:reference id="managementService" interface="org.activiti.engine.ManagementService"></osgi:reference>
+	
+	
+	
+	<bean id="traceService" class="me.kafeitu.demo.activiti.service.activiti.WorkflowTraceService">
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="historyService" ref="historyService"></property>
+	</bean>
+	<bean id="processAction" class="com.wiiy.pf.action.ProcessAction" scope="prototype">
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="traceService" ref="traceService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+		<property name="leaveService" ref="leaveService"></property>
+	</bean>
+	
+	<bean id="processTypeDao" class="com.wiiy.pf.dao.ProcessTypeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="processTypeService" class="com.wiiy.pf.service.impl.ProcessTypeServiceImpl">
+		<property name="processTypeDao" ref="processTypeDao"></property>
+	</bean>
+	<bean id="processTypeAction" class="com.wiiy.pf.action.ProcessTypeAction" scope="prototype">
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+	
+	<bean id="contactAction" class="com.wiiy.pf.action.ContactAction" scope="prototype">
+		<property name="leaveService" ref="leaveService"></property>
+		<property name="parkinService" ref="parkinService"></property>
+		<property name="fictitiousService" ref="fictitiousService"></property>
+		<property name="traceService" ref="traceService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+		<property name="contactBaseLogService" ref="contactBaseLogService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+	</bean>
+	
+	<bean id="leaveDao" class="com.wiiy.pf.dao.LeaveDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="leaveService" class="com.wiiy.pf.service.impl.LeaveServiceImpl">
+		<property name="leaveDao" ref="leaveDao"></property>
+	</bean>
+	<bean id="leaveAction" class="com.wiiy.pf.action.LeaveAction" scope="prototype">
+		<property name="leaveService" ref="leaveService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+	<bean id="parkinDao" class="com.wiiy.pf.dao.ParkinDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="parkinService" class="com.wiiy.pf.service.impl.ParkinServiceImpl">
+		<property name="parkinDao" ref="parkinDao"></property>
+	</bean>
+	<bean id="parkinAction" class="com.wiiy.pf.action.ParkinAction" scope="prototype">
+		<property name="parkinService" ref="parkinService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+	
+	<bean id="contactBaseLogDao" class="com.wiiy.pf.dao.ContactBaseLogDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contactBaseLogService" class="com.wiiy.pf.service.impl.ContactBaseLogServiceImpl">
+		<property name="contactBaseLogDao" ref="contactBaseLogDao"></property>
+	</bean>
+	<bean id="contactBaseLogAction" class="com.wiiy.pf.action.ContactBaseLogAction" scope="prototype">
+		<property name="contactBaseLogService" ref="contactBaseLogService"></property>
+	</bean>
+	
+	<bean id="contactBaseAttDao" class="com.wiiy.pf.dao.ContactBaseAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contactBaseAttService" class="com.wiiy.pf.service.impl.ContactBaseAttServiceImpl">
+		<property name="contactBaseAttDao" ref="contactBaseAttDao"></property>
+	</bean>
+	<bean id="contactBaseAttAction" class="com.wiiy.pf.action.ContactBaseAttAction" scope="prototype">
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+	</bean>
+	
+	<bean id="activitiDao" class="com.wiiy.pf.dao.ActivitiDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="afterModifyApplyContentProcessor" class="com.wiiy.pf.service.AfterModifyApplyContentProcessor">
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="leaveService" ref="leaveService"></property>
+	</bean>
+	<bean id="leaveProcessEndListener" class="com.wiiy.pf.service.LeaveProcessEndListener">
+		<property name="activitiDao" ref="activitiDao"></property>
+	</bean>
+	<bean id="variableCreateListener" class="me.kafeitu.demo.activiti.service.oa.leave.VariableCreateListener">
+	</bean>
+	<bean id="globalTaskListener" class="com.wiiy.pf.service.GlobalTaskListener">
+	</bean>
+	<bean id="reportBackEndProcessor" class="com.wiiy.pf.service.ReportBackEndProcessor">
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="leaveService" ref="leaveService"></property>
+	</bean>
+	
+	<bean id="workflowRoleAction" class="com.wiiy.pf.action.WorkflowRoleAction" scope="prototype">
+		<property name="identityService" ref="identityService"></property>
+	</bean>
+	<bean id="workflowUserAction" class="com.wiiy.pf.action.WorkflowUserAction" scope="prototype">
+		<property name="identityService" ref="identityService"></property>
+	</bean>
+	
+	<bean id="fictitiousDao" class="com.wiiy.pf.dao.FictitiousDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="fictitiousService" class="com.wiiy.pf.service.impl.FictitiousServiceImpl">
+		<property name="fictitiousDao" ref="fictitiousDao"></property>
+	</bean>
+	<bean id="fictitiousAction" class="com.wiiy.pf.action.FictitiousAction" scope="prototype">
+		<property name="fictitiousService" ref="fictitiousService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+	
+	
+	<bean id="engineeringBillPlanRentDao" class="com.wiiy.engineering.dao.EngineeringBillPlanRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="engineeringService" class="com.wiiy.engineering.service.impl.EngineeringBillPlanRentServiceImpl">
+		<property name="engineeringBillPlanRentDao" ref="engineeringBillPlanRentDao"></property>
+	</bean>
+	<bean id="billDao" class="com.wiiy.pf.dao.BillDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billService" class="com.wiiy.pf.service.impl.BillServiceImpl">
+		<property name="billDao" ref="billDao"></property>
+	</bean>
+	<bean id="billAction" class="com.wiiy.pf.action.BillAction" scope="prototype">
+		<property name="engineeringService" ref="engineeringService"></property>
+		<property name="billService" ref="billService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+	
+	<bean id="contactFormDao" class="com.wiiy.pf.dao.ContactFormDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contactFormService" class="com.wiiy.pf.service.impl.ContactFormServiceImpl">
+		<property name="contactFormDao" ref="contactFormDao"></property>
+	</bean>
+	<bean id="contactFormAction" class="com.wiiy.pf.action.ContactFormAction" scope="prototype">
+		<property name="contactFormService" ref="contactFormService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+	
+	<bean id="purchaseRequisitionDao" class="com.wiiy.pf.dao.PurchaseRequisitionDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="purchaseRequisitionService" class="com.wiiy.pf.service.impl.PurchaseRequisitionServiceImpl">
+		<property name="purchaseRequisitionDao" ref="purchaseRequisitionDao"></property>
+	</bean>
+	<bean id="purchaseRequisitionAction" class="com.wiiy.pf.action.PurchaseRequisitionAction" scope="prototype">
+		<property name="purchaseRequisitionService" ref="purchaseRequisitionService"></property>
+		<property name="runtimeService" ref="runtimeService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="historyService" ref="historyService"></property>
+		<property name="repositoryService" ref="repositoryService"></property>
+		<property name="identityService" ref="identityService"></property>
+		<property name="contactBaseAttService" ref="contactBaseAttService"></property>
+		<property name="processTypeService" ref="processTypeService"></property>
+	</bean>
+</beans>

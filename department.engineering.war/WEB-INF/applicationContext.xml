@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+	
+	<osgi:reference id="sessionService" interface="com.wiiy.hibernate.SessionService"/>
+	
+	
+	<bean id="engineeringProjectDao" class="com.wiiy.engineering.dao.EngineeringProjectDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="projectService" class="com.wiiy.engineering.service.impl.EngineeringProjectServiceImpl">
+		<property name="engineeringProjectDao" ref="engineeringProjectDao"></property>
+	</bean>
+	<bean id="projectAction" class="com.wiiy.engineering.action.ProjectAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+	</bean>
+	
+	<bean id="engineeringContractDao" class="com.wiiy.engineering.dao.EngineeringContractDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractService" class="com.wiiy.engineering.service.impl.EngineeringContractServiceImpl">
+		<property name="engineeringContractDao" ref="engineeringContractDao"></property>
+	</bean>
+	<bean id="contractAction" class="com.wiiy.engineering.action.ContractAction" scope="prototype">
+		<property name="contractService" ref="contractService"></property>
+	</bean>
+	
+	<bean id="engineeringBillPlanRentDao" class="com.wiiy.engineering.dao.EngineeringBillPlanRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billPlanRentService" class="com.wiiy.engineering.service.impl.EngineeringBillPlanRentServiceImpl">
+		<property name="engineeringBillPlanRentDao" ref="engineeringBillPlanRentDao"></property>
+	</bean>
+	<bean id="billPlanRentAction" class="com.wiiy.engineering.action.BillPlanRentAction" scope="prototype">
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+	</bean>
+	
+	<bean id="engineeringBillRentDao" class="com.wiiy.engineering.dao.EngineeringBillRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billRentService" class="com.wiiy.engineering.service.impl.EngineeringBillRentServiceImpl">
+		<property name="engineeringBillRentDao" ref="engineeringBillRentDao"></property>
+	</bean>
+	<bean id="billRentAction" class="com.wiiy.engineering.action.BillRentAction" scope="prototype">
+		<property name="billRentService" ref="billRentService"></property>
+	</bean>
+	
+	<bean id="engineeringContractAttDao" class="com.wiiy.engineering.dao.EngineeringContractAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractAttService" class="com.wiiy.engineering.service.impl.EngineeringContractAttServiceImpl">
+		<property name="engineeringContractAttDao" ref="engineeringContractAttDao"></property>
+	</bean>
+	<bean id="contractAttAction" class="com.wiiy.engineering.action.ContractAttAction" scope="prototype">
+		<property name="contractAttService" ref="contractAttService"></property>
+	</bean>
+	
+	<bean id="engineeringCustomerDao" class="com.wiiy.engineering.dao.EngineeringCustomerDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerService" class="com.wiiy.engineering.service.impl.EngineeringCustomerServiceImpl">
+		<property name="engineeringCustomerDao" ref="engineeringCustomerDao"></property>
+	</bean>
+	<bean id="customerAction" class="com.wiiy.engineering.action.CustomerAction" scope="prototype">
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	
+	<bean id="engineeringPlanDao" class="com.wiiy.engineering.dao.EngineeringPlanDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="planService" class="com.wiiy.engineering.service.impl.EngineeringPlanServiceImpl">
+		<property name="engineeringPlanDao" ref="engineeringPlanDao"></property>
+	</bean>
+	<bean id="planAction" class="com.wiiy.engineering.action.PlanAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+		<property name="planService" ref="planService"></property>
+	</bean>
+	
+	<bean id="engineeringFactDao" class="com.wiiy.engineering.dao.EngineeringFactDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="factService" class="com.wiiy.engineering.service.impl.EngineeringFactServiceImpl">
+		<property name="engineeringFactDao" ref="engineeringFactDao"></property>
+	</bean>
+	<bean id="factAction" class="com.wiiy.engineering.action.FactAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+		<property name="factService" ref="factService"></property>
+	</bean>
+</beans>

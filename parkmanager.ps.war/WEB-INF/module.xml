@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+<module idSpace="5" name="企业服务平台" order="2" icon="/core/common/images/ps_icon.png">
+    <menu id="10000" name="服务中心" order="0" uris="/parkmanager.ps/action!service.action" >
+     		<operation id="11001" name="企业信息" uris="/parkmanager.pb/dataReportToCustomer!countByCustomerId.action /parkmanager.pb/customer!view.action /parkmanager.pb/web/client/project_view.jsp /parkmanager.pb/web/client/staffer_view_by_customerId.jsp /parkmanager.pb/web/client/knowledge_view.jsp /parkmanager.pb/product!addByCustomerId.action /parkmanager.pb/staffer!addByCustomerId.action /parkmanager.pb/patent!addByCustomerId.action /parkmanager.pb/copyright!addByCustomerId.action 
+     		/parkmanager.pb/certification!addByCustomerId.action /parkmanager.pb/contect!list.action /parkmanager.pb/contectInfo!list.action /parkmanager.pb/customerModifyLog!list.action /parkmanager.pb/customerPolicy!list.action /parkmanager.pb/web/client/project_view.jsp /parkmanager.pb/product!list.action /parkmanager.pb/projectApply!list.action /parkmanager.pb/staffer!list.action /parkmanager.pb/patent!list.action /parkmanager.pb/copyright!list.action /parkmanager.pb/certification!list.action
+     		/parkmanager.pb/web/client/contect_list_byCustomerId.jsp /parkmanager.pb/web/client/contectInfo_list_by_customerId.jsp /parkmanager.pb/analyse!customerView.action /parkmanager.pb/web/client/dataReport_index.jsp /parkmanager.pb/dataReport!loadGroup.action /parkmanager.pb/dataProperty!loadParentProperty.action /parkmanager.pb/web/client/dataReportGroup_add.jsp /parkmanager.pb/dataReportGroup!save.action /parkmanager.pb/dataReportGroup!update.action /parkmanager.pb/dataReport!add.action /parkmanager.pb/dataReport!loadReportByGroupId.action /parkmanager.pb/dataReport!viewByCustomerId.action /parkmanager.pb/dataReportGroup!edit.action /parkmanager.pb/dataReportGroup!delete.action /parkmanager.pb/dataReport!save.action /parkmanager.pb/dataReport!update.action /parkmanager.pb/analyse!loadPropertyByTemplate.action
+     		/parkmanager.pb/dataReport!listByCustomerId.action /parkmanager.pb/dataReport!edit.action /parkmanager.pb/dataReport!delete.action /parkmanager.pb/customer!multiSelect.action /parkmanager.pb/analyse!customerCount.action /parkmanager.pb/analyse!dataXML2.action /parkmanager.pb/customer!loadCustomer.action /parkmanager.pb/dataReport!addCustomer.action
+     		" icon=""/>
+        	<operation id="11002" name="公共设施" uris="/parkmanager.pb/billPlanFacility!serviceListByFacilityOrderId.action /parkmanager.pb/facility!serviceList.action /parkmanager.pb/facility!serviceView.action /parkmanager.pb/web/facility/resources_monery_list.jsp /parkmanager.pb/facilityOrder!serviceView.action /parkmanager.pb/web/facility/cost_layer_serviceList.jsp /parkmanager.pb/facilityOrder!listByUserId.action /parkmanager.pb/billPlanFacility!serviceList.action /parkmanager.pb/facilityOrder!serviceList.action" icon=""/>
+        	<operation id="11003" name="数据报送" uris="/parkmanager.pb/web/client/dataReportToCustomerListByCustomerId.jsp /parkmanager.pb/dataReportToCustomer!reportPub.action
+        	/parkmanager.pb/dataReportToCustomer!edit.action /parkmanager.pb/dataReportToCustomer!report.action /parkmanager.pb/dataReportToCustomer!view.action
+        	/parkmanager.pb/dataReportToCustomer!listByCustomerId.action /parkmanager.crm/dataReportToCustomer!countByCustomerId.action /parkmanager.crm/web/client/dataReportToCustomerListByCustomerId.jsp /parkmanager.crm/dataReportToCustomer!listByCustomerId.action" icon=""/>
+        	<operation id="11004" name="资料管理" uris="/parkmanager.oa/web/document/public_service_document_index.jsp /parkmanager.oa/docPublic!loadDocByParentId.action" icon=""/>
+        	<operation id="11005" name="物业报修" uris="/parkmanager.pb/propertyFix!serviceList.action /parkmanager.pb/propertyFix!listByUserId.action /parkmanager.pb/propertyFix!list.action" icon=""/>
+        	<operation id="11006" name="合同信息" uris="/parkmanager.pb/contract!customerContractList.action /parkmanager.pb/contract!simpleView.action /parkmanager.pb/subjectRent!list.action
+        	/parkmanager.pb/billPlanFacility!list.action /parkmanager.pb/subjectNetwork!list.action
+        	/parkmanager.pb/contractApproval!list.action /parkmanager.pb/contractModifyLog!list.action /parkmanager.pb/contractMemo!list.action /parkmanager.pb/deposit!list.action /parkmanager.pb/contractAtt!list.action /parkmanager.pb/billPlanRent!list.action
+        	" icon=""/>
+        	<operation id="11007" name="账单信息" uris="/parkmanager.pb/bill!customerBillList.action /parkmanager.pb/bill!view.action /parkmanager.pb/bill!loadBill.action /parkmanager.pb/bill!printCustomerBill.action" icon=""/>
+     		<operation id="11008" name="企业信息-基本信息-新建联系人" uris="/parkmanager.pb/contect!addByCustomerId.action /parkmanager.pb/contect!save.action"/>
+     		<operation id="11009" name="企业信息-基本信息-编辑联系人" uris="/parkmanager.pb/contect!edit.action /parkmanager.pb/contect!update.action"/>
+     		<operation id="110010" name="企业信息-基本信息-查看联系人" uris="/parkmanager.pb/contect!view.action"/>
+     		<operation id="110011" name="企业信息-基本信息-删除联系人" uris="/parkmanager.pb/contect!delete.action"/>
+     		<operation id="110012" name="企业信息-基本信息-新建交往信息" uris="/parkmanager.pb/contectInfo!addByCustomerId.action /parkmanager.pb/contect!loadContectsByCustomerId.action /parkmanager.pb/contectInfo!save.action"/>
+     		<operation id="110013" name="企业信息-基本信息-编辑交往信息" uris="/parkmanager.pb/contectInfo!edit.action /parkmanager.pb/contectInfo!update.action"/>
+     		<operation id="110014" name="企业信息-基本信息-查看交往信息" uris="/parkmanager.pb/contectInfo!view.action"/>
+     		<operation id="110015" name="企业信息-基本信息-删除交往信息" uris="/parkmanager.pb/contectInfo!delete.action"/>
+     		<operation id="110016" name="企业信息-基本信息-新建变更信息" uris="/parkmanager.pb/customerModifyLog!add.action /parkmanager.pb/customerModifyLog!save.action"/>
+     		<operation id="110017" name="企业信息-基本信息-编辑变更信息" uris="/parkmanager.pb/customerModifyLog!edit.action /parkmanager.pb/customerModifyLog!update.action"/>
+     		<operation id="110018" name="企业信息-基本信息-查看变更信息" uris="/parkmanager.pb/customerModifyLog!view.action"/>
+     		<operation id="110019" name="企业信息-基本信息-删除变更信息" uris="/parkmanager.pb/customerModifyLog!delete.action"/>
+     		<operation id="110020" name="企业信息-项目信息-新建项目信息" uris="/parkmanager.pb/projectApply!addByCustomerId.action /parkmanager.pb/product!save.action /parkmanager.pb/product!loadProductsByCustomerId.action"/>
+     		<operation id="110021" name="企业信息-项目信息-查看项目信息" uris="/parkmanager.pb/product!view.action"/>
+     		<operation id="110022" name="企业信息-项目信息-编辑项目信息" uris="/parkmanager.pb/product!edit.action /parkmanager.pb/product!update.action"/>
+     		<operation id="110023" name="企业信息-项目信息-删除项目信息" uris="/parkmanager.pb/product!delete.action"/>
+     		<operation id="110024" name="企业信息-项目信息-新建项目申报情况" uris="/parkmanager.pb/projectApply!addByCustomerId.action /parkmanager.pb/projectApply!save.action"/>
+     		<operation id="110025" name="企业信息-项目信息-查看项目申报情况" uris="/parkmanager.pb/projectApply!view.action"/>
+     		<operation id="110026" name="企业信息-项目信息-编辑项目申报情况" uris="/parkmanager.pb/projectApply!edit.action  /parkmanager.pb/projectApply!update.action"/>
+     		<operation id="110027" name="企业信息-项目信息-删除项目申报情况" uris="/parkmanager.pb/projectApply!delete.action"/>
+     		<operation id="110028" name="企业信息-主要人员-新建主要人员" uris="/parkmanager.pb/staffer!save.action"/>
+     		<operation id="110029" name="企业信息-主要人员-查看主要人员" uris="/parkmanager.pb/staffer!view.action"/>
+     		<operation id="110030" name="企业信息-主要人员-编辑主要人员" uris="/parkmanager.pb/staffer!edit.action /parkmanager.pb/staffer!update.action"/>
+     		<operation id="110031" name="企业信息-主要人员-删除主要人员" uris="/parkmanager.pb/staffer!delete.action"/>
+     		<operation id="110032" name="企业信息-知识产权-新建专利" uris="/parkmanager.pb/patent!save.action"/>
+     		<operation id="110033" name="企业信息-知识产权-查看专利" uris="/parkmanager.pb/patent!view.action"/>
+     		<operation id="110034" name="企业信息-知识产权-编辑专利" uris="/parkmanager.pb/patent!edit.action /parkmanager.pb/patent!update.action"/>
+     		<operation id="110035" name="企业信息-知识产权-删除专利" uris="/parkmanager.pb/patent!delete.action"/>
+     		<operation id="110036" name="企业信息-知识产权-新建著作权" uris="/parkmanager.pb/copyright!save.action"/>
+     		<operation id="110037" name="企业信息-知识产权-查看著作权" uris="/parkmanager.pb/copyright!view.action"/>
+     		<operation id="110038" name="企业信息-知识产权-编辑著作权" uris="/parkmanager.pb/copyright!edit.action /parkmanager.pb/copyright!update.action"/>
+     		<operation id="110039" name="企业信息-知识产权-删除著作权" uris="/parkmanager.pb/copyright!delete.action"/>
+     		<operation id="110040" name="企业信息-知识产权-新建认证" uris="/parkmanager.pb/certification!save.action"/>
+     		<operation id="110041" name="企业信息-知识产权-查看认证" uris="/parkmanager.pb/certification!view.action"/>
+     		<operation id="110042" name="企业信息-知识产权-编辑认证" uris="/parkmanager.pb/certification!edit.action /parkmanager.pb/certification!update.action"/>
+     		<operation id="110043" name="企业信息-知识产权-删除认证" uris="/parkmanager.pb/certification!delete.action"/>
+     		<operation id="110044" name="物业报修-查看" uris="/parkmanager.pb/propertyFix!view.action"/>
+    		<operation id="110045" name="公共设施-查看" uris="/parkmanager.pb/facility!facilityWeekInfo.action"/>
+     </menu>
+    <menu id="20000" name="消息中心" order="0" uris="/parkmanager.oa/mail!list.action /parkmanager.oa/mail!mail.action">
+    	<operation id="20001" name="新建" uris="/core/upload.action /parkmanager.oa/mail!sendMail.action /parkmanager.oa/web/content/ckeditor/uploader/browse.jsp /parkmanager.oa/web/content/ckeditor/uploader/upload.jsp /parkmanager.oa/mail!send.action"/>
+		<operation id="20002" name="删除" uris="/parkmanager.oa/mail!delete.action "/>
+		<operation id="20003" name="答复" uris="/parkmanager.oa/mail!replay.action "/>
+		<operation id="20004" name="附件下载" uris="/parkmanager.oa/mail!downloadAttachment.action "/>
+		<operation id="20005" name="存草稿" uris="/parkmanager.oa/mail!saveInDraft.action "/>
+    </menu>
+</module>
+</modules>

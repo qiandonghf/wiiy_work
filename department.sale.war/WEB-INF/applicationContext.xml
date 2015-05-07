@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+	
+	<osgi:reference id="sessionService" interface="com.wiiy.hibernate.SessionService"/>
+	<!-- 销售部客户 -->
+	<bean id="customerDao" class="com.wiiy.sale.dao.SaleCustomerDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerService" class="com.wiiy.sale.service.impl.SaleCustomerServiceImpl">
+		<property name="customerDao" ref="customerDao"></property>
+	</bean>
+	<bean id="customerAction" class="com.wiiy.sale.action.CustomerAction" scope="prototype">
+		<property name="customerService" ref="customerService"></property>
+		<property name="customerLabelService" ref="customerLabelService"></property>
+		<property name="customerCategoryService" ref="customerCategoryService"></property>
+	</bean>
+	<!-- 客户分类 -->
+	<bean id="customerCategoryDao" class="com.wiiy.sale.dao.SaleCustomerCategoryDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerCategoryService" class="com.wiiy.sale.service.impl.SaleCustomerCategoryServiceImpl">
+		<property name="customerCategoryDao" ref="customerCategoryDao"></property>
+	</bean>
+	<bean id="customerCategoryAction" class="com.wiiy.sale.action.SaleCustomerCategoryAction" scope="prototype">
+		<property name="customerCategoryService" ref="customerCategoryService"></property>
+	</bean>
+	<!-- 企业标签 -->
+	<bean id="customerLabelDao" class="com.wiiy.sale.dao.SaleCustomerLabelDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerLabelService" class="com.wiiy.sale.service.impl.SaleCustomerLabelServiceImpl">
+		<property name="customerLabelDao" ref="customerLabelDao"></property>
+	</bean>
+	<bean id="customerLabelAction" class="com.wiiy.sale.action.SaleCustomerLabelAction" scope="prototype">
+		<property name="customerLabelService" ref="customerLabelService"></property>
+		<property name="customerCategoryService" ref="customerCategoryService"></property>
+	</bean>
+	<!-- 企业标签关系 -->
+	<bean id="customerLabelRefDao" class="com.wiiy.sale.dao.SaleCustomerLabelRefDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerLabelRefService" class="com.wiiy.sale.service.impl.SaleCustomerLabelRefServiceImpl">
+		<property name="customerLabelRefDao" ref="customerLabelRefDao"></property>
+	</bean>
+	<bean id="customerLabelRefAction" class="com.wiiy.sale.action.SaleCustomerLabelRefAction" scope="prototype">
+		<property name="customerLabelRefService" ref="customerLabelRefService"></property>
+	</bean>
+	<!-- 来电/来访 -->
+	<bean id="contectInfoDao" class="com.wiiy.sale.dao.ContectInfoDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contectInfoService" class="com.wiiy.sale.service.impl.ContectInfoServiceImpl">
+		<property name="contectInfoDao" ref="contectInfoDao"></property>
+	</bean>
+	<bean id="contectInfoAction" class="com.wiiy.sale.action.ContectInfoAction" scope="prototype">
+		<property name="contectInfoService" ref="contectInfoService"></property>
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	<!-- 回访信息 -->
+	<bean id="repeatedVisteDao" class="com.wiiy.sale.dao.RepeatedVisteDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="repeatedVisteService" class="com.wiiy.sale.service.impl.RepeatedVisteServiceImpl">
+		<property name="repeatedVisteDao" ref="repeatedVisteDao"></property>
+	</bean>
+	<bean id="repeatedVisteAction" class="com.wiiy.sale.action.RepeatedVisteAction" scope="prototype">
+		<property name="repeatedVisteService" ref="repeatedVisteService"></property>
+	</bean>
+	<!-- 预订登记 -->
+	<bean id="registrationBookDao" class="com.wiiy.sale.dao.RegistrationBookDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="registrationBookService" class="com.wiiy.sale.service.impl.RegistrationBookServiceImpl">
+		<property name="registrationBookDao" ref="registrationBookDao"></property>
+	</bean>
+	<bean id="registrationBookAction" class="com.wiiy.sale.action.RegistrationBookAction" scope="prototype">
+		<property name="registrationBookService" ref="registrationBookService"></property>
+	</bean>
+	
+	<!-- 合同 -->
+	<bean id="saleContractDao" class="com.wiiy.sale.dao.SaleContractDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractService" class="com.wiiy.sale.service.impl.SaleContractServiceImpl">
+		<property name="saleContractDao" ref="saleContractDao"></property>
+	</bean>
+	<bean id="contractAction" class="com.wiiy.sale.action.ContractAction" scope="prototype">
+		<property name="contractService" ref="contractService"></property>
+	</bean>
+	
+	<!-- 资金计划 -->
+	<bean id="saleBillPlanRentDao" class="com.wiiy.sale.dao.SaleBillPlanRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billPlanRentService" class="com.wiiy.sale.service.impl.SaleBillPlanRentServiceImpl">
+		<property name="saleBillPlanRentDao" ref="saleBillPlanRentDao"></property>
+	</bean>
+	<bean id="billPlanRentAction" class="com.wiiy.sale.action.BillPlanRentAction" scope="prototype">
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+	</bean>
+	
+	<!-- 实际结算-->
+	<bean id="saleBillRentDao" class="com.wiiy.sale.dao.SaleBillRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billRentService" class="com.wiiy.sale.service.impl.SaleBillRentServiceImpl">
+		<property name="saleBillRentDao" ref="saleBillRentDao"></property>
+	</bean>
+	<bean id="billRentAction" class="com.wiiy.sale.action.BillRentAction" scope="prototype">
+		<property name="billRentService" ref="billRentService"></property>
+	</bean>
+	
+	<!-- 合同附件-->
+	<bean id="saleContractAttDao" class="com.wiiy.sale.dao.SaleContractAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractAttService" class="com.wiiy.sale.service.impl.SaleContractAttServiceImpl">
+		<property name="saleContractAttDao" ref="saleContractAttDao"></property>
+	</bean>
+	<bean id="contractAttAction" class="com.wiiy.sale.action.ContractAttAction" scope="prototype">
+		<property name="contractAttService" ref="contractAttService"></property>
+	</bean>
+	
+	<!-- 项目-->
+	<bean id="saleProjectDao" class="com.wiiy.sale.dao.SaleProjectDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="projectService" class="com.wiiy.sale.service.impl.SaleProjectServiceImpl">
+		<property name="saleProjectDao" ref="saleProjectDao"></property>
+	</bean>
+	<bean id="projectAction" class="com.wiiy.sale.action.ProjectAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+	</bean>
+	
+	<!-- 项目计划进度-->
+	<bean id="salePlanDao" class="com.wiiy.sale.dao.SalePlanDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="planService" class="com.wiiy.sale.service.impl.SalePlanServiceImpl">
+		<property name="salePlanDao" ref="salePlanDao"></property>
+	</bean>
+	<bean id="planAction" class="com.wiiy.sale.action.PlanAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+		<property name="planService" ref="planService"></property>
+	</bean>
+	
+	<!-- 项目实际进度-->
+	<bean id="saleFactDao" class="com.wiiy.sale.dao.SaleFactDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="factService" class="com.wiiy.sale.service.impl.SaleFactServiceImpl">
+		<property name="saleFactDao" ref="saleFactDao"></property>
+	</bean>
+	<bean id="factAction" class="com.wiiy.sale.action.FactAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+		<property name="factService" ref="factService"></property>
+	</bean>
+	
+	<!-- 住宅预订 -->
+	<bean id="residentialDao" class="com.wiiy.sale.dao.ResidentialDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="residentialService" class="com.wiiy.sale.service.impl.ResidentialServiceImpl">
+		<property name="residentialDao" ref="residentialDao"></property>
+	</bean>
+	<bean id="residentialAction" class="com.wiiy.sale.action.ResidentialAction" scope="prototype">
+		<property name="residentialService" ref="residentialService"></property>
+		<property name="roomService" ref="roomService"></property>
+	</bean>
+	
+	<!-- 房间  -->
+	<bean id="roomDao" class="com.wiiy.park.dao.RoomDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomService" class="com.wiiy.park.service.impl.RoomServiceImpl">
+		<property name="roomDao" ref="roomDao"></property>
+	</bean>
+	
+</beans>

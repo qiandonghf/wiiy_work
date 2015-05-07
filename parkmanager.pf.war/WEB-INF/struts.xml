@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="rvalue" type="json1">
+				<param name="root">result.value</param>
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="suspended">/web/suspendedError.html</result>
+		</global-results>
+	</package>
+	<package name="wms" namespace="/" extends="root">
+		<action name="process" class="processAction">
+			<result name="edit">/web/process/process_edit.jsp</result>
+			<result name="view">/web/process/process_view.jsp</result>
+		</action>
+		<action name="contact" class="contactAction">
+			<result name="leaveView">/web/contact/contact_leave_view.jsp</result>
+			<result name="myView">/web/contact/contact_myView.jsp</result>
+			<result name="taskList">/web/contact/contact_deal_list.jsp</result>
+			<result name="taskList1">/web/contact/contact_deal_list1.jsp</result>
+			<result name="hiTaskList">/web/contact/contact_deal_hilist.jsp</result>
+			<result name="launchList">/web/contact/contact_launch_my.jsp</result>
+			<result name="handle">/web/contact/contact_handle.jsp</result>
+		</action>
+		<action name="leave" class="leaveAction">
+			<result name="apply">/views/oa/leave/leaveApply.jsp</result>
+			<result name="runningList">/views/oa/leave/running.jsp</result>
+			<result name="taskList">/views/oa/leave/taskList.jsp</result>
+			<result name="finishedList">/views/oa/leave/finished.jsp</result>
+			<result name="view">/web/contact/leave/view.jsp</result>
+			<result name="handle">/web/contact/leave/handle.jsp</result>
+		</action>
+		<action name="parkin" class="parkinAction">
+			<result name="view">/web/contact/parkin/view.jsp</result>
+			<result name="handle">/web/contact/parkin/handle.jsp</result>
+		</action>
+		<action name="workflowRole" class="workflowRoleAction">
+			<result name="list">/web/workflowRole/list.jsp</result>
+			<result name="edit">/web/workflowRole/edit.jsp</result>
+			<result name="add">/web/workflowRole/add.jsp</result>
+			<result name="multiSelect">/web/workflowRole/multiSelect.jsp</result>
+		</action>
+		<action name="workflowUser" class="workflowUserAction">
+			<result name="multiSelect">/web/workflowRole/multiSelect.jsp</result>
+		</action>
+		<action name="fictitious" class="fictitiousAction">
+			<result name="add">/web/contact/fictitious/add.jsp</result>
+			<result name="addByInvestmentId">/web/contact/fictitious/addByInvestmentId.jsp</result>
+			<result name="view">/web/contact/fictitious/view.jsp</result>
+			<result name="handle">/web/contact/fictitious/handle.jsp</result>
+			<result name="attList">/web/contact/fictitious/attList.jsp</result>
+			<result name="customerAdd">/web/contact/fictitious/customer_add.jsp</result>
+		</action>
+		<action name="inapproval" class="fictitiousAction">
+			<result name="add">/web/contact/fictitious/add.jsp</result>
+			<result name="addByInvestmentId">/web/contact/fictitious/addByInvestmentId.jsp</result>
+			<result name="view">/web/contact/fictitious/view.jsp</result>
+			<result name="handle">/web/contact/fictitious/handle.jsp</result>
+			<result name="attList">/web/contact/fictitious/attList.jsp</result>
+			<result name="customerAdd">/web/contact/fictitious/customer_add.jsp</result>
+		</action>
+		<action name="contactBaseAtt" class="contactBaseAttAction">
+			<result name="attImage">/web/contact/attImage.jsp</result>
+		</action>
+		<action name="bill" class="billAction">
+			<result name="add">/web/contact/bill/add.jsp</result>
+			<result name="addByPlanId">/web/contact/bill/bill_rent_add.jsp</result>
+			<result name="view">/web/contact/bill/view.jsp</result>
+			<result name="viewById">/web/contact/bill/billRent_view.jsp</result>
+			<result name="handle">/web/contact/bill/handle.jsp</result>
+			<result name="attList">/web/contact/bill/attList.jsp</result>
+			<result name="customerAdd">/web/contact/bill/customer_add.jsp</result>
+		</action>
+		<action name="contactform" class="contactFormAction">
+			<result name="add">/web/contact/contactform/add.jsp</result>
+			<result name="view">/web/contact/contactform/view.jsp</result>
+			<result name="handle">/web/contact/contactform/handle.jsp</result>
+		</action>
+		<action name="contactinform" class="contactFormAction">
+			<result name="add">/web/contact/contactinform/add.jsp</result>
+			<result name="view">/web/contact/contactinform/view.jsp</result>
+			<result name="handle">/web/contact/contactinform/handle.jsp</result>
+		</action>
+		<action name="purchase" class="purchaseRequisitionAction">
+			<result name="add">/web/contact/purchase/add.jsp</result>
+			<result name="view">/web/contact/purchase/view.jsp</result>
+			<result name="handle">/web/contact/purchase/handle.jsp</result>
+		</action>
+	</package>
+</struts>

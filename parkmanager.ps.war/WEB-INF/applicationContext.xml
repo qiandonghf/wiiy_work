@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  					  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+  					  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+	<osgi:reference id="iExtensionRegistry" interface="org.eclipse.core.runtime.IExtensionRegistry"></osgi:reference>
+                      
+	<bean id="enterpriseServiceExtensions" name="enterpriseServiceExtensions" class="com.wiiy.ps.extensions.EnterpriseServiceExtensions">
+		<property name="registry" ref="iExtensionRegistry"></property>
+	</bean>
+	
+	<bean id="action" class="com.wiiy.ps.action.Action">
+		<property name="enterpriseServiceExtensions" ref="enterpriseServiceExtensions"></property>
+	</bean>
+</beans>

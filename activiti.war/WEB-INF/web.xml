@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<!-- To allow session-scoped beans in Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	    <servlet>
+        <servlet-name>RestletServlet</servlet-name>
+        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+        <init-param>
+            <!-- Application class name -->
+            <param-name>org.restlet.application</param-name>
+            <param-value>org.activiti.rest.service.application.ActivitiRestServicesApplication</param-value>
+        </init-param>
+    </servlet>
+	<servlet>
+	    <servlet-name>ExplorerRestletServlet</servlet-name>
+	    <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+	    <init-param>
+	        <!-- Application class name -->
+	        <param-name>org.restlet.application</param-name>
+	        <param-value>org.activiti.explorer.rest.ExplorerRestApplication</param-value>
+	    </init-param>
+	</servlet>
+	 
+	<servlet-mapping>
+	    <servlet-name>ExplorerRestletServlet</servlet-name>
+	    <url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>RestletServlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+	<!-- <filter>
+		<filter-name>UIFilter</filter-name>
+		<filter-class>org.activiti.explorer.filter.ExplorerFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>UIFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+		<init-param>   
+			<param-name>config</param-name>   
+			<param-value>struts-default.xml,struts-plugin.xml,/WEB-INF/struts.xml</param-value>  
+		</init-param> 
+	</filter>
+	
+    <filter-mapping>
+    	<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>		
+    </filter-mapping>
+	
+
+	<!-- struts2用以处理用户Web请求的路径模式-->
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.osgi.web.context.support.OsgiBundleXmlWebApplicationContext</param-value>
+	</context-param>
+	
+	
+	<!-- To load the Spring context -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Session timeout on one day -->
+	<session-config>
+		<session-timeout>480</session-timeout>
+	</session-config>
+  
+	<jsp-config>   
+	    <jsp-property-group>   
+	        <url-pattern>*.jsp</url-pattern>   
+	    <el-ignored>false</el-ignored>   
+	    <!-- <el-ignored>false</el-ignored> -->   
+	    </jsp-property-group>   
+	</jsp-config> 
+		
+
+</web-app>

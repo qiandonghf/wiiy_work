@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.wiiy.estate.entity.ParkingFee">
+    	<meta attribute="class-description">停车费</meta> 
+    	<meta attribute="extends">com.wiiy.commons.entity.TreeEntity</meta>
+		<id name="id" unsaved-value="-1" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		<property name="licenseNoId" type="java.lang.Long">
+			<column name="licenseNo_id">
+				<comment>车牌ID</comment>
+			</column>
+		</property>
+         <property name="licenseNo" type="java.lang.String">
+			<column name="licenseNo_name">
+				<comment>车牌</comment>
+			</column>
+		</property>
+		<property name="parkingManageId" type="java.lang.Long">
+			<column name="parkingManage_id">
+				<comment>车位ID</comment>
+			</column>
+		</property>
+         <property name="parkingManage" type="java.lang.String">
+			<column name="parkingManage_name">
+				<comment>车位</comment>
+			</column>
+		</property>
+		<!-- <property name="parkingManageId" type="java.lang.Long">
+			<column name="parking_manage_id">
+				<comment>车位外键</comment>
+			</column>
+		</property>
+        <many-to-one name="parkingManage" class="com.wiiy.estate.entity.ParkingManage" foreign-key="fk_parkingFee_parkingManage" insert="false" update="false" fetch="join">
+            <column name="parking_manage_id">
+                <comment>车位</comment>
+            </column>
+        </many-to-one> -->
+		<property name="name" type="java.lang.String">
+			<column name="name" >
+				<comment>单位/个人</comment>
+			</column>
+		</property>
+		<property name="toller" type="java.lang.String">
+			<column name="toller" >
+				<comment>收费人</comment>
+			</column>
+		</property>
+		<property name="money" type="java.lang.Double">
+			<column name="money" precision="2">
+				<comment>金额</comment>
+			</column>
+		</property>
+		<property name="startDate" type="java.util.Date">
+			<column name="start_date">
+				<comment>开始时间</comment>
+			</column>
+		</property>
+		<property name="endDate" type="java.util.Date">
+			<column name="end_date">
+				<comment>结束时间</comment>
+			</column>
+		</property>
+		<property name="memo" type="java.lang.String">
+			<column name="memo"  length="512">
+				<comment>备注</comment>
+			</column>
+		</property>
+		   <property name="isRemind">
+			<column name="isRemind" sql-type="varchar(50)">
+				<comment>是否关闭提醒</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.BooleanEnum</param>
+				<param name="type">12</param>
+			</type>		
+		</property>
+		<property name="entityStatus">
+        	<column name="entity_status">
+				<comment>实体状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.EntityStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="create_time">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="creator" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator">
+				<comment>创建人姓名</comment>
+			</column>
+		</property>
+		<property name="creatorId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator_id">
+				<comment>创建人ID</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="modify_time">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="modifier" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier">
+				<comment>修改人姓名</comment>
+			</column>
+		</property>
+		<property name="modifierId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier_id">
+				<comment>修改人ID</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

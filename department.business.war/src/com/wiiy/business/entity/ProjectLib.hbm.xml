@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.wiiy.business.entity.ProjectLib">
+    	<meta attribute="class-description">项目库</meta> 
+    	<meta attribute="extends">com.wiiy.commons.entity.BaseEntity</meta>
+		<id name="id" unsaved-value="-1" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<generator class="native" />
+		</id>
+		<property name="orderId" type="java.lang.Long">
+			<column name="order_id">
+				<comment>编号</comment>
+			</column>
+		</property>
+		<property name="incubatorName" type="java.lang.String">
+			<column name="incubator_name" length="255">
+				<comment>项目来源</comment>
+			</column>
+		</property>
+		<property name="customerId" type="java.lang.Long">
+			<column name="customer_id">
+				<comment>公司ID</comment>
+			</column>
+		</property>
+         <property name="customerName" type="java.lang.String">
+			<column name="customer_name">
+				<comment>公司名称</comment>
+			</column>
+		</property>
+		<property name="homePage" type="java.lang.String">
+			<column name="home_page" length="255">
+				<comment>网址</comment>
+			</column>
+		</property>
+		<property name="phone" type="java.lang.String" not-null="true">
+			<column name="phone" not-null="true" length="50">
+				<comment>联系电话</comment>
+			</column>
+		</property>
+		<property name="zipCode" type="java.lang.String">
+			<column name="zipCode" length="50">
+				<comment>邮编</comment>
+			</column>
+		</property>
+		
+		<many-to-one name="city" class="com.wiiy.core.entity.DataDict" foreign-key="fk_Project_datadict_city" insert="false" update="false" fetch="join">
+			<column name="city_id" not-null="true">
+				<comment>所在城市</comment>
+			</column>
+		</many-to-one>
+		<property name="cityId" type="java.lang.String">
+			<column name="city_id" not-null="true">
+				<comment>所在城市外键</comment>
+			</column>
+		</property>
+		<property name="address" type="java.lang.String">
+			<column name="address">
+				<comment>地址</comment>
+			</column>
+		</property>
+		<property name="logo" type="java.lang.String">
+			<column name="logo" length="255">
+				<comment>LOGO</comment>
+			</column>
+		</property>
+		<property name="leaders" type="java.lang.String">
+			<column name="leaders" sql-type="text">
+				<comment>公司负责人{name:张三;position:总经理}</comment>
+			</column>
+		</property>
+		<property name="setupTime" type="java.util.Date">
+			<column name="setup_time">
+				<comment>成立时间</comment>
+			</column>
+		</property>
+		<property name="employeeCnt" type="java.lang.Integer">
+			<column name="employee_cnt">
+				<comment>员工人数</comment>
+			</column>
+		</property>
+		
+		<property name="companyMemo" type="java.lang.String">
+			<column name="company_memo" sql-type="text">
+				<comment>公司简介</comment>
+			</column>
+		</property>
+		
+		<property name="name" type="java.lang.String" not-null="true" length="255">
+			<column name="name" not-null="true">
+				<comment>项目名称</comment>
+			</column>
+		</property>
+		<property name="amount" type="java.lang.Double" not-null="true">
+			<column name="amount" not-null="true">
+				<comment>融资额</comment>
+			</column>
+		</property>
+		<property name="endTime" type="java.util.Date">
+			<column name="end_time">
+				<comment>融资期限</comment>
+			</column>
+		</property>
+		<many-to-one name="industry" class="com.wiiy.core.entity.DataDict" foreign-key="fk_Project_datadict_industry" insert="false" update="false" fetch="join">
+			<column name="industry_id" not-null="true">
+				<comment>所属行业</comment>
+			</column>
+		</many-to-one>
+		<property name="industryId" type="java.lang.String">
+			<column name="industry_id" not-null="true">
+				<comment>所属行业外键</comment>
+			</column>
+		</property>
+		
+		<property name="status">
+        	<column name="status">
+				<comment>目前状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.business.preferences.enums.ProjectStatusEnum</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="gainStatus">
+        	<column name="gain_status">
+				<comment>营收情况</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.business.preferences.enums.ProjectGainStatusEnum</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="gainMemo" type="java.lang.String">
+			<column name="gain_memo" sql-type="text">
+				<comment>财务状况({year:2005;in:20000;out:10000;profit:10000})</comment>
+			</column>
+		</property>
+		<property name="questionMemo" type="java.lang.String">
+			<column name="question_memo" sql-type="text">
+				<comment>问题详情({business:公司业务;team:团队优势;demand:客户需求;market:目标市场及潜在市场;customer:潜在客户;strategy:市场战略;model:商业模式;power:公司竞争力;superiority:竞争优势})</comment>
+			</column>
+		</property>
+		
+		
+		<property name="entityStatus">
+        	<column name="entity_status">
+				<comment>实体状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.EntityStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="create_time">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="creator" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator">
+				<comment>创建人姓名</comment>
+			</column>
+		</property>
+		<property name="creatorId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator_id">
+				<comment>创建人ID</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="modify_time">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="modifier" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier">
+				<comment>修改人姓名</comment>
+			</column>
+		</property>
+		<property name="modifierId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier_id">
+				<comment>修改人ID</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

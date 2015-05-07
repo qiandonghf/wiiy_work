@@ -1,0 +1,18 @@
+<Server port="2005" shutdown="SHUTDOWN">
+
+
+  <Service name="Catalina">
+    <Connector port="92" />
+
+    <Engine name="Catalina" defaultHost="localhost">
+      <Host name="localhost" unpackWARs="true" autoDeploy="false"
+       liveDeploy="false" deployOnStartup="false"
+       xmlValidation="false" xmlNamespaceAware="false"/>
+
+	<Context path="/core" reloadable="true" crossContext="true"></Context> 
+	<Context path="/parkmanager.pb" reloadable="true" crossContext="true"></Context> 
+
+    </Engine>
+    
+  </Service>
+</Server>

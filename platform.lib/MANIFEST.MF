@@ -1,0 +1,104 @@
+Manifest-Version: 1.0
+Export-Package: org.hibernate.ejb;version="4.0.1.Final";uses:="javax.n
+ aming,javax.naming.spi,javax.persistence,javax.persistence.criteria,j
+ avax.persistence.metamodel,javax.persistence.spi,javax.sql,javax.tran
+ saction,org.hibernate,org.hibernate.cfg,org.hibernate.ejb.internal,or
+ g.hibernate.ejb.packaging,org.hibernate.ejb.util,org.hibernate.engine
+ .spi,org.hibernate.engine.transaction.spi,org.hibernate.engine.transa
+ ction.synchronization.spi,org.hibernate.mapping,org.hibernate.proxy,o
+ rg.hibernate.service,org.hibernate.transform,org.hibernate.type,org.x
+ ml.sax",org.hibernate.ejb.cfg.spi;version="4.0.1.Final",org.hibernate
+ .ejb.connection;version="4.0.1.Final";uses:="javax.sql,org.hibernate,
+ org.hibernate.service.jdbc.connections.internal",org.hibernate.ejb.cr
+ iteria;version="4.0.1.Final";uses:="javax.persistence,javax.persisten
+ ce.criteria,javax.persistence.metamodel,org.hibernate.ejb,org.hiberna
+ te.ejb.criteria.expression,org.hibernate.type",org.hibernate.ejb.crit
+ eria.expression;version="4.0.1.Final";uses:="javax.persistence.criter
+ ia,javax.persistence.metamodel,org.hibernate.ejb.criteria,org.hiberna
+ te.ejb.criteria.path",org.hibernate.ejb.criteria.expression.function;
+ version="4.0.1.Final";uses:="javax.persistence.criteria,org.hibernate
+ .ejb.criteria,org.hibernate.ejb.criteria.expression",org.hibernate.ej
+ b.criteria.path;version="4.0.1.Final";uses:="javax.persistence.criter
+ ia,javax.persistence.metamodel,org.hibernate.ejb.criteria,org.hiberna
+ te.ejb.criteria.expression,org.hibernate.persister.collection",org.hi
+ bernate.ejb.criteria.predicate;version="4.0.1.Final";uses:="javax.per
+ sistence.criteria,org.hibernate.ejb.criteria,org.hibernate.ejb.criter
+ ia.expression,org.hibernate.ejb.criteria.path",org.hibernate.ejb.even
+ t;version="4.0.1.Final";uses:="org.hibernate.annotations.common.refle
+ ction,org.hibernate.cfg,org.hibernate.engine.spi,org.hibernate.event.
+ internal,org.hibernate.event.service.spi,org.hibernate.event.spi,org.
+ hibernate.integrator.spi,org.hibernate.metamodel.binding,org.hibernat
+ e.metamodel.source,org.hibernate.persister.entity,org.hibernate.servi
+ ce.classloading.spi,org.hibernate.service.spi",org.hibernate.ejb.inst
+ rument;version="4.0.1.Final";uses:="javax.persistence.spi,org.hiberna
+ te.bytecode.buildtime.spi",org.hibernate.ejb.internal;version="4.0.1.
+ Final";uses:="javax.naming,javax.persistence,javax.transaction,org.hi
+ bernate,org.hibernate.cache,org.hibernate.dialect,org.hibernate.engin
+ e.loading.internal,org.hibernate.engine.spi,org.hibernate.id,org.hibe
+ rnate.internal,org.hibernate.service.jdbc.dialect.internal,org.hibern
+ ate.service.jndi,org.hibernate.type,org.jboss.logging",org.hibernate.
+ ejb.metamodel;version="4.0.1.Final";uses:="javax.persistence.metamode
+ l,org.hibernate.engine.spi,org.hibernate.mapping,org.hibernate.tuple.
+ entity,org.hibernate.type",org.hibernate.ejb.packaging;version="4.0.1
+ .Final";uses:="javax.persistence.spi,org.w3c.dom,org.xml.sax",org.hib
+ ernate.ejb.util;version="4.0.1.Final";uses:="javax.naming.event,javax
+ .persistence,javax.persistence.spi,org.hibernate,org.hibernate.ejb,or
+ g.hibernate.ejb.internal",org.hibernate.engine.spi;version="4.0.1.Fin
+ al";uses:="org.hibernate,org.hibernate.ejb.internal,org.hibernate.eve
+ nt.spi,org.hibernate.type"
+Implementation-Version: 4.0.1.Final
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: JBoss Hibernate Entity Manager
+provider: gradle
+Implementation-Url: http://hibernate.org
+Bundle-Vendor: SpringSource
+Implementation-Vendor: Hibernate.org
+Fragment-Host: com.springsource.org.hibernate;bundle-version="[4.0.0, 
+ 5.0.0)"
+Implementation-Vendor-Id: org.hibernate
+Bundle-Version: 4.0.1.Final
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.springsource.org.hibernate.ejb
+Import-Package: javassist.bytecode;version="[3.15.0.GA, 4.0.0)",javass
+ ist.bytecode.annotation;version="[3.15.0.GA, 4.0.0)",javax.naming;ver
+ sion="0",javax.naming.event;version="0",javax.naming.spi;version="0",
+ javax.persistence;version="[2.0.0, 3.0.0)",javax.persistence.criteria
+ ;version="[2.0.0, 3.0.0)",javax.persistence.metamodel;version="[2.0.0
+ , 3.0.0)",javax.persistence.spi;version="[2.0.0, 3.0.0)",javax.sql;ve
+ rsion="0",javax.transaction;version="[1.1.0, 2.0.0)";resolution:="opt
+ ional",javax.xml.parsers;version="0",javax.xml.transform;version="0",
+ javax.xml.transform.dom;version="0",javax.xml.transform.stream;versio
+ n="0",javax.xml.validation;version="0",org.dom4j;version="[1.6.1, 2.0
+ .0)",org.hibernate.annotations.common;version="[4.0.1.Final, 5.0.0.GA
+ )",org.hibernate.annotations.common.reflection;version="[4.0.1.Final,
+  5.0.0.GA)",org.hibernate.annotations.common.util;version="[4.0.1.Fin
+ al, 5.0.0.GA)",org.hibernate.cache;version="[4.0.1.Final, 5.0.0.GA)",
+ org.hibernate.dialect;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate
+ .dialect.lock;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.id;vers
+ ion="[4.0.1.Final, 5.0.0.GA)",org.hibernate.id.factory.spi;version="[
+ 4.0.1.Final, 5.0.0.GA)",org.hibernate.integrator.spi;version="[4.0.1.
+ Final, 5.0.0.GA)",org.hibernate.internal;version="[4.0.1.Final, 5.0.0
+ .GA)",org.hibernate.internal.util;version="[4.0.1.Final, 5.0.0.GA)",o
+ rg.hibernate.internal.util.collections;version="[4.0.1.Final, 5.0.0.G
+ A)",org.hibernate.internal.util.xml;version="[4.0.1.Final, 5.0.0.GA)"
+ ,org.hibernate.metamodel.binding;version="[4.0.1.Final, 5.0.0.GA)",or
+ g.hibernate.metamodel.domain;version="[4.0.1.Final, 5.0.0.GA)",org.hi
+ bernate.metamodel.source;version="[4.0.1.Final, 5.0.0.GA)",org.hibern
+ ate.metamodel.source.binder;version="[4.0.1.Final, 5.0.0.GA)",org.hib
+ ernate.property;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.servi
+ ce;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.service.classloadi
+ ng.spi;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.service.intern
+ al;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.service.jdbc.conne
+ ctions.internal;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.servi
+ ce.jdbc.dialect.internal;version="[4.0.1.Final, 5.0.0.GA)",org.hibern
+ ate.service.jndi;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.serv
+ ice.jndi.internal;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.ser
+ vice.jta.platform.spi;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate
+ .service.spi;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.transfor
+ m;version="[4.0.1.Final, 5.0.0.GA)",org.hibernate.tuple;version="[4.0
+ .1.Final, 5.0.0.GA)",org.hibernate.tuple.component;version="[4.0.1.Fi
+ nal, 5.0.0.GA)",org.hibernate.tuple.entity;version="[4.0.1.Final, 5.0
+ .0.GA)",org.jboss.logging;version="[3.1.0.CR2, 4.0.0.GA)",org.w3c.dom
+ ;version="0",org.xml.sax;version="0",org.jbpm.persistence.processinst
+ ance;version="0"
+

@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+	
+	<osgi:reference id="sessionService" interface="com.wiiy.hibernate.SessionService"/>
+	
+	<bean id="businessCustomerDao" class="com.wiiy.business.dao.CustomerDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerService" class="com.wiiy.business.service.impl.CustomerServiceImpl">
+		<property name="businessCustomerDao" ref="businessCustomerDao"></property>
+	</bean>
+	
+	<!--引用business 企业分类  -->
+	<bean id="customerCategoryDao" class="com.wiiy.business.dao.CustomerCategoryDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerCategoryService" class="com.wiiy.business.service.impl.CustomerCategoryServiceImpl">
+		<property name="customerCategoryDao" ref="customerCategoryDao"></property>
+	</bean>
+	<!--引用business 企业标签  -->
+	<bean id="customerLabelDao" class="com.wiiy.business.dao.CustomerLabelDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerLabelService" class="com.wiiy.business.service.impl.CustomerLabelServiceImpl">
+		<property name="customerLabelDao" ref="customerLabelDao"></property>
+	</bean>
+	<!--调用分类和标签的service  -->
+	<bean id="propertyFixDao" class="com.wiiy.estate.dao.PropertyFixDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="propertyFixService" class="com.wiiy.estate.service.impl.PropertyFixServiceImpl">
+		<property name="propertyFixDao" ref="propertyFixDao"></property>
+	</bean>
+	<bean id="propertyFixAction" class="com.wiiy.estate.action.PropertyFixAction" scope="prototype">
+		<property name="propertyFixService" ref="propertyFixService"></property>
+	</bean>
+	
+	<bean id="complaintDao" class="com.wiiy.estate.dao.ComplaintDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="complaintService" class="com.wiiy.estate.service.impl.ComplaintServiceImpl">
+		<property name="complaintDao" ref="complaintDao"></property>
+	</bean>
+	<bean id="complaintAction" class="com.wiiy.estate.action.ComplaintAction" scope="prototype">
+		<property name="complaintService" ref="complaintService"></property>
+	</bean>
+	
+	<bean id="parkingFeeDao" class="com.wiiy.estate.dao.ParkingFeeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="parkingFeeService" class="com.wiiy.estate.service.impl.ParkingFeeServiceImpl">
+		<property name="parkingFeeDao" ref="parkingFeeDao"></property>
+	</bean>
+	<bean id="parkingFeeAction" class="com.wiiy.estate.action.ParkingFeeAction" scope="prototype">
+		<property name="parkingManageService" ref="parkingManageService"></property>
+		<property name="parkingFeeService" ref="parkingFeeService"></property>
+	</bean>
+	<!-- 办公用品采购申请 -->
+	<bean id="supplyPurchaseDao" class="com.wiiy.estate.dao.SupplyPurchaseDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyPurchaseService" class="com.wiiy.estate.service.impl.SupplyPurchaseServiceImpl">
+		<property name="supplyPurchaseDao" ref="supplyPurchaseDao"></property>
+	</bean>
+	<bean id="supplyPurchaseAction" class="com.wiiy.estate.action.SupplyPurchaseAction" scope="prototype">
+		<property name="supplyPurchaseService" ref="supplyPurchaseService"></property>
+	</bean>
+	
+	<!-- 办公用品 -->
+	<bean id="supplyDao" class="com.wiiy.estate.dao.SupplyDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyService" class="com.wiiy.estate.service.impl.SupplyServiceImpl">
+		<property name="supplyDao" ref="supplyDao"></property>
+		<property name="supplyCategoryDao" ref="supplyCategoryDao"></property>
+	</bean>
+	<bean id="supplyAction" class="com.wiiy.estate.action.SupplyAction" scope="prototype">
+		<property name="supplyService" ref="supplyService"></property>
+		<property name="supplyStockInService" ref="supplyStockInService"></property>
+		<property name="supplyApplyService" ref="supplyApplyService"></property>
+		<property name="supplyCategoryService" ref="supplyCategoryService"></property>
+		<property name="supplyPurchaseService" ref="supplyPurchaseService"></property>
+	</bean>
+	
+	<!-- 办公用品入库 -->
+	<bean id="supplyStockInDao" class="com.wiiy.estate.dao.SupplyStockInDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyStockInService" class="com.wiiy.estate.service.impl.SupplyStockInServiceImpl">
+		<property name="supplyStockInDao" ref="supplyStockInDao"></property>
+		<property name="supplyPurchaseService" ref="supplyPurchaseService"></property>
+	</bean>
+	<bean id="supplyStockInAction" class="com.wiiy.estate.action.SupplyStockInAction" scope="prototype">
+		<property name="supplyStockInService" ref="supplyStockInService"></property>
+		<property name="supplyPurchaseFormService" ref="supplyPurchaseFormService"></property>
+		<property name="supplyPurchaseConfigService" ref="supplyPurchaseConfigService"></property>
+		<property name="supplyPurchaseService" ref="supplyPurchaseService"></property>
+		<property name="supplyService" ref="supplyService"></property>
+	</bean>
+	
+	<!-- 办公用品分类 -->
+	<bean id="supplyCategoryDao" class="com.wiiy.estate.dao.SupplyCategoryDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyCategoryService" class="com.wiiy.estate.service.impl.SupplyCategoryServiceImpl">
+		<property name="supplyCategoryDao" ref="supplyCategoryDao"></property>
+	</bean>
+	<bean id="supplyCategoryAction" class="com.wiiy.estate.action.SupplyCategoryAction" scope="prototype">
+		<property name="supplyCategoryService" ref="supplyCategoryService"></property>
+	</bean>
+	
+	<!-- 办公用品申请 -->
+	<bean id="supplyApplyDao" class="com.wiiy.estate.dao.SupplyApplyDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyApplyService" class="com.wiiy.estate.service.impl.SupplyApplyServiceImpl">
+		<property name="supplyApplyDao" ref="supplyApplyDao"></property>
+	</bean>
+	<bean id="supplyApplyAction" class="com.wiiy.estate.action.SupplyApplyAction" scope="prototype">
+		<property name="supplyApplyService" ref="supplyApplyService"></property>
+	</bean>
+	<!-- 办公用品采购申请关联 -->
+	<bean id="supplyPurchaseConfigDao" class="com.wiiy.estate.dao.SupplyPurchaseConfigDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyPurchaseConfigService" class="com.wiiy.estate.service.impl.SupplyPurchaseConfigServiceImpl">
+		<property name="supplyPurchaseConfigDao" ref="supplyPurchaseConfigDao"></property>
+	</bean>
+	<bean id="supplyPurchaseConfigAction" class="com.wiiy.estate.action.SupplyPurchaseConfigAction" scope="prototype">
+		<property name="supplyPurchaseConfigService" ref="supplyPurchaseConfigService"></property>
+		<property name="supplyCategoryService" ref="supplyCategoryService"></property>
+	</bean>
+	<!-- 办公用品采购申请表 -->
+	<bean id="supplyPurchaseFormDao" class="com.wiiy.estate.dao.SupplyPurchaseFormDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="supplyPurchaseFormService" class="com.wiiy.estate.service.impl.SupplyPurchaseFormServiceImpl">
+		<property name="supplyPurchaseFormDao" ref="supplyPurchaseFormDao"></property>
+	</bean>
+	<bean id="supplyPurchaseFormAction" class="com.wiiy.estate.action.SupplyPurchaseFormAction" scope="prototype">
+		<property name="supplyPurchaseFormService" ref="supplyPurchaseFormService"></property>
+		<property name="supplyPurchaseService" ref="supplyPurchaseService"></property>
+		<property name="supplyPurchaseConfigService" ref="supplyPurchaseConfigService"></property>
+	</bean>
+	<!-- 维护费用 -->
+	<bean id="fixFeeDao" class="com.wiiy.estate.dao.FixFeeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="fixFeeService" class="com.wiiy.estate.service.impl.FixFeeServiceImpl">
+		<property name="fixFeeDao" ref="fixFeeDao"></property>
+	</bean>
+	<bean id="fixFeeAction" class="com.wiiy.estate.action.FixFeeAction" scope="prototype">
+		<property name="fixFeeService" ref="fixFeeService"></property>
+	</bean>
+	
+	<bean id="billPlanFacilityDao" class="com.wiiy.estate.dao.BillPlanFacilityDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billPlanFacilityService" class="com.wiiy.estate.service.impl.BillPlanFacilityServiceImpl">
+		<property name="billPlanFacilityDao" ref="billPlanFacilityDao"></property>
+		<property name="billTypeService" ref="billTypeService"></property>
+		<property name="billService" ref="billService"></property>
+		<property name="facilityOrderService" ref="facilityOrderService"></property>
+	</bean>
+	
+	<bean id="facilityOrderDao" class="com.wiiy.estate.dao.FacilityOrderDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="facilityOrderService" class="com.wiiy.estate.service.impl.FacilityOrderServiceImpl">
+		<property name="facilityOrderDao" ref="facilityOrderDao"></property>
+	</bean>
+	
+	<!-- 园区、楼宇、房间  -->
+	<bean id="parkDao" class="com.wiiy.park.dao.ParkDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="parkService" class="com.wiiy.park.service.impl.ParkServiceImpl">
+		<property name="parkDao" ref="parkDao"></property>
+	</bean>
+	<bean id="buildingDao" class="com.wiiy.park.dao.BuildingDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="buildingService" class="com.wiiy.park.service.impl.BuildingServiceImpl">
+		<property name="buildingDao" ref="buildingDao"></property>
+	</bean>
+	<bean id="roomDao" class="com.wiiy.park.dao.RoomDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomService" class="com.wiiy.park.service.impl.RoomServiceImpl">
+		<property name="roomDao" ref="roomDao"></property>
+	</bean>
+	<bean id="meterDao" class="com.wiiy.estate.dao.MeterDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="meterService" class="com.wiiy.estate.service.impl.MeterServiceImpl">
+		<property name="meterDao" ref="meterDao"></property>
+	</bean>
+	<bean id="meterAction" class="com.wiiy.estate.action.MeterAction" scope="prototype">
+		<property name="meterService" ref="meterService"></property>
+		<property name="parkService" ref="parkService"></property>
+		<property name="buildingService" ref="buildingService"></property>
+	</bean>
+	
+	<!-- 水电表抄表 -->
+	<bean id="meterLabelDao" class="com.wiiy.estate.dao.MeterLabelDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="meterLabelService" class="com.wiiy.estate.service.impl.MeterLabelServiceImpl">
+		<property name="meterLabelDao" ref="meterLabelDao"></property>
+	</bean>
+	<bean id="meterLabelAction" class="com.wiiy.estate.action.MeterLabelAction" scope="prototype">
+		<property name="meterLabelService" ref="meterLabelService"></property>
+		<property name="buildingService" ref="buildingService"></property>
+	</bean>
+	
+	<!-- 水电表抄表记录 -->
+	<bean id="meterLabelRecordDao" class="com.wiiy.estate.dao.MeterLabelRecordDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="meterLabelRecordService" class="com.wiiy.estate.service.impl.MeterLabelRecordServiceImpl">
+		<property name="meterLabelRecordDao" ref="meterLabelRecordDao"></property>
+		<property name="meterService" ref="meterService"></property>
+		<property name="meterLabelService" ref="meterLabelService"></property>
+		<property name="parkService" ref="parkService"></property>
+		<property name="billService" ref="billService"></property>
+		<property name="billTypeService" ref="billTypeService"></property>
+		<property name="customerService" ref="customerService"></property>
+		<property name="roomMeterFeeService" ref="roomMeterFeeService"></property>
+	</bean>
+	<bean id="meterLabelRecordAction" class="com.wiiy.estate.action.MeterLabelRecordAction" scope="prototype">
+		<property name="meterLabelRecordService" ref="meterLabelRecordService"></property>
+		<property name="meterService" ref="meterService"></property>
+		<property name="meterLabelService" ref="meterLabelService"></property>
+		<property name="parkService" ref="parkService"></property>
+	</bean>
+	
+	<!-- 水电表费用 -->
+	<bean id="roomMeterFeeDao" class="com.wiiy.estate.dao.RoomMeterFeeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roomMeterFeeService" class="com.wiiy.estate.service.impl.RoomMeterFeeServiceImpl">
+		<property name="roomMeterFeeDao" ref="roomMeterFeeDao"></property>
+		<property name="meterService" ref="meterService"></property>
+	</bean>
+	<bean id="roomMeterFeeAction" class="com.wiiy.estate.action.RoomMeterFeeAction" scope="prototype">
+		<property name="roomMeterFeeService" ref="roomMeterFeeService"></property>
+		<property name="parkService" ref="parkService"></property>
+		<property name="roomService" ref="roomService"></property>
+		<property name="buildingService" ref="buildingService"></property>
+	</bean>
+	
+	<bean id="statisticService" class="com.wiiy.estate.service.impl.StatisticServiceImpl">
+		<property name="businessCustomerDao" ref="businessCustomerDao"></property>
+	</bean>
+	
+	<bean id="selfMeterLabelDao" class="com.wiiy.estate.dao.SelfMeterLabelDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="selfMeterLabelService" class="com.wiiy.estate.service.impl.SelfMeterLabelServiceImpl">
+		<property name="selfMeterLabelDao" ref="selfMeterLabelDao"></property>
+	</bean>
+	<bean id="selfMeterLabelAction" class="com.wiiy.estate.action.SelfMeterLabelAction" scope="prototype">
+		<property name="selfMeterLabelService" ref="selfMeterLabelService"></property>
+		<property name="buildingService" ref="buildingService"></property>
+	</bean>
+	
+	<bean id="selfLabelRecordDao" class="com.wiiy.estate.dao.SelfLabelRecordDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="selfLabelRecordService" class="com.wiiy.estate.service.impl.SelfLabelRecordServiceImpl">
+		<property name="selfLabelRecordDao" ref="selfLabelRecordDao"></property>
+	</bean>
+	<bean id="selfLabelRecordAction" class="com.wiiy.estate.action.SelfLabelRecordAction" scope="prototype">
+		<property name="selfLabelRecordService" ref="selfLabelRecordService"></property>
+		<property name="meterService" ref="meterService"></property>
+		<property name="selfMeterLabelService" ref="selfMeterLabelService"></property>
+	</bean>
+	<!-- 公摊费用 -->
+	<bean id="feeShareDao" class="com.wiiy.estate.dao.FeeShareDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="feeShareService" class="com.wiiy.estate.service.impl.FeeShareServiceImpl">
+		<property name="feeShareDao" ref="feeShareDao"></property>
+	</bean>
+	<bean id="feeShareAction" class="com.wiiy.estate.action.FeeShareAction" scope="prototype">
+		<property name="feeShareService" ref="feeShareService"></property>
+	</bean>
+	
+	<!-- 合同 -->
+	<bean id="contractDao" class="com.wiiy.estate.dao.EstateContractDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractService" class="com.wiiy.estate.service.impl.ContractServiceImpl">
+		<property name="contractDao" ref="contractDao"></property>
+		<property name="subjectRentService" ref="subjectRentService"></property>
+		<property name="roomService" ref="roomService"></property>
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+		<!-- <property name="parkLogDao" ref="parkLogDao"></property> -->
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	<bean id="contractAction" class="com.wiiy.estate.action.ContractAction" scope="prototype">
+		<property name="contractService" ref="contractService"></property>
+		<property name="subjectRentService" ref="subjectRentService"></property>
+		<property name="billService" ref="billService"></property>
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+		<property name="customerService" ref="customerService"></property>
+		<property name="contractTemplateService" ref="contractTemplateService"></property>
+	</bean>
+	
+	<!-- 合同附件 -->
+	<bean id="contractAttDao" class="com.wiiy.estate.dao.EstateContractAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractAttService" class="com.wiiy.estate.service.impl.ContractAttServiceImpl">
+		<property name="contractAttDao" ref="contractAttDao"></property>
+	</bean>
+	<bean id="contractAttAction" class="com.wiiy.estate.action.ContractAttAction" scope="prototype">
+		<property name="contractAttService" ref="contractAttService"></property>
+	</bean>
+	
+	<!-- 合同模版 -->
+	<bean id="contractTemplateDao" class="com.wiiy.estate.dao.ContractTemplateDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractTemplateService" class="com.wiiy.estate.service.impl.ContractTemplateServiceImpl">
+		<property name="contractTemplateDao" ref="contractTemplateDao"></property>
+	</bean>
+	<bean id="contractTemplateAction" class="com.wiiy.estate.action.ContractTemplateAction" scope="prototype">
+		<property name="contractTemplateService" ref="contractTemplateService"></property>
+	</bean>
+	
+	<!-- 合同备忘 -->
+	<bean id="contractMemoDao" class="com.wiiy.estate.dao.ContractMemoDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractMemoService" class="com.wiiy.estate.service.impl.ContractMemoServiceImpl">
+		<property name="contractMemoDao" ref="contractMemoDao"></property>
+	</bean>
+	<bean id="contractMemoAction" class="com.wiiy.estate.action.ContractMemoAction" scope="prototype">
+		<property name="contractMemoService" ref="contractMemoService"></property>
+	</bean>
+	
+	<!-- 合同变更记录 -->
+	<bean id="contractModifyLogDao" class="com.wiiy.estate.dao.ContractModifyLogDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractModifyLogService" class="com.wiiy.estate.service.impl.ContractModifyLogServiceImpl">
+		<property name="contractModifyLogDao" ref="contractModifyLogDao"></property>
+	</bean>
+	<bean id="contractModifyLogAction" class="com.wiiy.estate.action.ContractModifyLogAction" scope="prototype">
+		<property name="contractModifyLogService" ref="contractModifyLogService"></property>
+	</bean>
+	
+	<!-- 账单-->
+	<bean id="billDao" class="com.wiiy.park.dao.BillDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billService" class="com.wiiy.park.service.impl.BillServiceImpl">
+		<property name="billDao" ref="billDao"></property>
+	</bean>
+	
+	<bean id="billTypeDao" class="com.wiiy.park.dao.BillTypeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billTypeService" class="com.wiiy.park.service.impl.BillTypeServiceImpl">
+		<property name="billTypeDao" ref="billTypeDao"></property>
+	</bean>
+	
+	<!-- 账单资金计划 -->
+	<bean id="billPlanRentDao" class="com.wiiy.estate.dao.BillPlanRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billPlanRentService" class="com.wiiy.estate.service.impl.BillPlanRentServiceImpl">
+		<property name="billTypeService" ref="billTypeService"></property>
+		<property name="billPlanRentDao" ref="billPlanRentDao"></property>
+		<property name="billService" ref="billService"></property>
+	</bean>
+	<bean id="billPlanRentAction" class="com.wiiy.estate.action.BillPlanRentAction" scope="prototype">
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+		<property name="subjectRentService" ref="subjectRentService"></property>
+	</bean>
+	
+	<bean id="estateBillRentDao" class="com.wiiy.estate.dao.EstateBillRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billRentService" class="com.wiiy.estate.service.impl.EstateBillRentServiceImpl">
+		<property name="estateBillRentDao" ref="estateBillRentDao"></property>
+	</bean>
+	<bean id="billRentAction" class="com.wiiy.estate.action.BillRentAction" scope="prototype">
+		<property name="billRentService" ref="billRentService"></property>
+	</bean>
+	
+	<bean id="garageDao" class="com.wiiy.estate.dao.GarageDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="garageService" class="com.wiiy.estate.service.impl.GarageServiceImpl">
+		<property name="garageDao" ref="garageDao"></property>
+	</bean>
+	<bean id="garageAction" class="com.wiiy.estate.action.GarageAction" scope="prototype">
+		<property name="parkService" ref="parkService"></property>
+		<property name="garageService" ref="garageService"></property>
+	</bean>
+
+	<bean id="parkingManageDao" class="com.wiiy.estate.dao.ParkingManageDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="parkingManageService" class="com.wiiy.estate.service.impl.ParkingManageServiceImpl">
+		<property name="parkingManageDao" ref="parkingManageDao"></property>
+	</bean>
+	<bean id="parkingManageAction" class="com.wiiy.estate.action.ParkingManageAction" scope="prototype">
+		<property name="parkingManageService" ref="parkingManageService"></property>
+		<property name="parkService" ref="parkService"></property>
+		<property name="garageService" ref="garageService"></property>
+	</bean>
+		<bean id="vehicleManagementDao" class="com.wiiy.estate.dao.VehicleManagementDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="vehicleManagementService" class="com.wiiy.estate.service.impl.VehicleManagementServiceImpl">
+		<property name="vehicleManagementDao" ref="vehicleManagementDao"></property>
+	</bean>
+	<bean id="vehicleManagementAction" class="com.wiiy.estate.action.VehicleManagementAction" scope="prototype">
+		<property name="vehicleManagementService" ref="vehicleManagementService"></property>
+	</bean>
+	
+	<bean id="deviceManagementDao" class="com.wiiy.estate.dao.DeviceManagementDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="deviceManagementService" class="com.wiiy.estate.service.impl.DeviceManagementServiceImpl">
+		<property name="deviceManagementDao" ref="deviceManagementDao"></property>
+	</bean>
+	<bean id="deviceManagementAction" class="com.wiiy.estate.action.DeviceManagementAction" scope="prototype">
+		<property name="deviceManagementService" ref="deviceManagementService"></property>
+		<property name="devicePatrolService" ref="devicePatrolService"></property>
+		<property name="deviceYearlyService" ref="deviceYearlyService"></property>
+	</bean>
+	
+	<bean id="deviceMaintenanceDao" class="com.wiiy.estate.dao.DeviceMaintenanceDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="deviceMaintenanceService" class="com.wiiy.estate.service.impl.DeviceMaintenanceServiceImpl">
+		<property name="deviceMaintenanceDao" ref="deviceMaintenanceDao"></property>
+	</bean>
+	<bean id="deviceMaintenanceAction" class="com.wiiy.estate.action.DeviceMaintenanceAction" scope="prototype">
+		<property name="deviceMaintenanceService" ref="deviceMaintenanceService"></property>
+	</bean>
+	
+	<bean id="devicePatrolDao" class="com.wiiy.estate.dao.DevicePatrolDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="devicePatrolService" class="com.wiiy.estate.service.impl.DevicePatrolServiceImpl">
+		<property name="devicePatrolDao" ref="devicePatrolDao"></property>
+	</bean>
+	<bean id="devicePatrolAction" class="com.wiiy.estate.action.DevicePatrolAction" scope="prototype">
+		<property name="devicePatrolService" ref="devicePatrolService"></property>
+	</bean>
+	
+	<bean id="deviceWorkOrderDao" class="com.wiiy.estate.dao.DeviceWorkOrderDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="deviceWorkOrderService" class="com.wiiy.estate.service.impl.DeviceWorkOrderServiceImpl">
+		<property name="deviceWorkOrderDao" ref="deviceWorkOrderDao"></property>
+	</bean>
+	<bean id="deviceWorkOrderAction" class="com.wiiy.estate.action.DeviceWorkOrderAction" scope="prototype">
+		<property name="deviceWorkOrderService" ref="deviceWorkOrderService"></property>
+	</bean>
+	
+	<bean id="deviceYearlyDao" class="com.wiiy.estate.dao.DeviceYearlyDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="deviceYearlyService" class="com.wiiy.estate.service.impl.DeviceYearlyServiceImpl">
+		<property name="deviceYearlyDao" ref="deviceYearlyDao"></property>
+	</bean>
+	<bean id="deviceYearlyAction" class="com.wiiy.estate.action.DeviceYearlyAction" scope="prototype">
+		<property name="deviceYearlyService" ref="deviceYearlyService"></property>
+	</bean>
+	
+	<!-- 标的 -->
+	<bean id="subjectRentDao" class="com.wiiy.estate.dao.SubjectRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="subjectRentService" class="com.wiiy.estate.service.impl.SubjectRentServiceImpl">
+		<property name="subjectRentDao" ref="subjectRentDao"></property>
+	</bean>
+	<bean id="subjectRentAction" class="com.wiiy.estate.action.SubjectRentAction" scope="prototype">
+		<property name="subjectRentService" ref="subjectRentService"></property>
+	</bean>
+	
+	<!-- 保证金 -->
+	<bean id="depositDao" class="com.wiiy.estate.dao.DepositDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="depositService" class="com.wiiy.estate.service.impl.DepositServiceImpl">
+		<property name="depositDao" ref="depositDao"></property>
+		<property name="billTypeService" ref="billTypeService"></property>
+		<property name="billService" ref="billService"></property>
+	</bean>
+	<bean id="depositAction" class="com.wiiy.estate.action.DepositAction" scope="prototype">
+		<property name="depositService" ref="depositService"></property>
+		<property name="contractService" ref="contractService"></property>
+	</bean>
+	
+	<!-- 水电表抄表 收费报表 -->
+	<bean id="meterLabelReportDao" class="com.wiiy.estate.dao.MeterLabelReportDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="meterLabelReportService" class="com.wiiy.estate.service.impl.MeterLabelReportServiceImpl">
+		<property name="meterLabelReportDao" ref="meterLabelReportDao"></property>
+	</bean>
+	<bean id="meterLabelReportAction" class="com.wiiy.estate.action.MeterLabelReportAction" scope="prototype">
+		<property name="meterLabelReportService" ref="meterLabelReportService"></property>
+	</bean>
+</beans>

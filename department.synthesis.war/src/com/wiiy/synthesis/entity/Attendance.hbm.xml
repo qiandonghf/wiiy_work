@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.wiiy.synthesis.entity.Attendance">
+    	<meta attribute="class-description">考勤</meta> 
+    	<meta attribute="extends">com.wiiy.commons.entity.BaseEntity</meta>
+		<id name="id" unsaved-value="-1" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="name" not-null="true">
+				<comment>姓名</comment>
+			</column>
+		</property>
+		<property name="userId" type="java.lang.Long">
+			<column name="user_id">
+				<comment>用户外键</comment>
+			</column>
+		</property>
+		<many-to-one name="user" class="com.wiiy.core.entity.User" foreign-key="fk_Attendance_user" insert="false" update="false" fetch="join">
+			<column name="user_id">
+				<comment>用户</comment>
+			</column>
+		</many-to-one>
+		<property name="status">
+            <column name="status" not-null="true">
+                <comment>状态</comment>
+            </column>
+            <type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.synthesis.preferences.enums.AttendanceEnum</param>
+				<param name="type">12</param>
+			</type>
+        </property> 
+		<property name="startTime" type="java.util.Date">
+			<column name="start_time">
+				<comment>考勤时间</comment>
+			</column>
+		</property>
+		<property name="endTime" type="java.util.Date">
+			<column name="end_time">
+				<comment>合同结束时间</comment>
+			</column>
+		</property>
+		<property name="bank" type="java.lang.String">
+			<column name="bank">
+				<comment>开户行</comment>
+			</column>
+		</property>
+		<property name="bankAccount" type="java.lang.String">
+			<column name="bank_account">
+				<comment>银行账号</comment>
+			</column>
+		</property> -->
+		
+		
+		
+		<!-- <property name="salaryDefineId" type="java.lang.Long" not-null="true">
+			<column name="salary_define_id" not-null="true">
+				<comment>薪资标准外键</comment>
+			</column>
+		</property>
+		<many-to-one name="salaryDefine" class="com.wiiy.synthesis.entity.SalaryDefine" foreign-key="fk_Archives_salaryDefine" insert="false" update="false" fetch="join">
+			<column name="salary_define_id">
+				<comment>薪资标准</comment>
+			</column>
+		</many-to-one>
+		<property name="salary" type="java.lang.Double">
+			<column name="salary" precision="2">
+				<comment>薪资标准金额</comment>
+			</column>
+		</property>
+		<property name="salaryName" type="java.lang.String">
+			<column name="salary_name">
+				<comment>薪资标准名称</comment>
+			</column>
+		</property>
+		<property name="salaryNo" type="java.lang.String">
+			<column name="salary_no">
+				<comment>薪资标准编号</comment>
+			</column>
+		</property>
+		<property name="train" type="java.lang.String">
+            <column name="train" sql-type="text">
+                <comment>培训情况</comment>
+            </column>
+        </property> -->
+		<property name="homeAddr" type="java.lang.String">
+			<column name="home_addr">
+				<comment>家庭地址</comment>
+			</column>
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="phone">
+				<comment>电话号码</comment>
+			</column>
+		</property>
+		<property name="zipCode" type="java.lang.String">
+			<column name="zip_code">
+				<comment>家庭邮编</comment>
+			</column>
+		</property>
+		<!-- <property name="qq" type="java.lang.String">
+			<column name="qq">
+				<comment>QQ号码</comment>
+			</column>
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="email">
+				<comment>邮箱地址</comment>
+			</column>
+		</property>
+		<property name="mobile" type="java.lang.String">
+			<column name="mobile">
+				<comment>手机号码</comment>
+			</column>
+		</property> -->
+		
+		<property name="degree" type="java.lang.String">
+			<column name="degree">
+				<comment>学历</comment>
+			</column>
+		</property>
+		
+		<property name="school" type="java.lang.String">
+			<column name="school">
+				<comment>毕业学校</comment>
+			</column>
+		</property>
+		
+		<property name="profession" type="java.lang.String">
+			<column name="profession">
+				<comment>专业</comment>
+			</column>
+		</property>
+		<!-- <property name="workTime" type="java.lang.String">
+			<column name="work_time">
+				<comment>参加工作时间</comment>
+			</column>
+		</property>
+		<property name="education" type="java.lang.String">
+            <column name="education" sql-type="text">
+                <comment>教育背景</comment>
+            </column>
+        </property>
+		<property name="rewards" type="java.lang.String">
+            <column name="rewards" sql-type="text">
+                <comment>奖惩情情况</comment>
+            </column>
+        </property>
+        <property name="experience" type="java.lang.String">
+            <column name="experience" sql-type="text">
+                <comment>工作经验</comment>
+            </column>
+        </property>
+        <property name="hobby" type="java.lang.String">
+            <column name="hobby" sql-type="text">
+                <comment>个人爱好</comment>
+            </column>
+        </property> -->
+		<property name="memo" type="java.lang.String">
+            <column name="memo" sql-type="text">
+                <comment>备注</comment>
+            </column>
+        </property>
+		<property name="entityStatus">
+        	<column name="entity_status">
+				<comment>实体状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.EntityStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="create_time">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="creator" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator">
+				<comment>创建人姓名</comment>
+			</column>
+		</property>
+		<property name="creatorId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator_id">
+				<comment>创建人ID</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="modify_time">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="modifier" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier">
+				<comment>修改人姓名</comment>
+			</column>
+		</property>
+		<property name="modifierId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier_id">
+				<comment>修改人ID</comment>
+			</column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

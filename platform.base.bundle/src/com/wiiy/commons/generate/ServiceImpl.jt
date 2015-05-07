@@ -1,0 +1,149 @@
+package ${parentPackage}.service.impl;
+
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import com.wiiy.commons.preferences.enums.EntityStatus;
+import com.wiiy.commons.util.BeanUtil;
+import com.wiiy.hibernate.FKConstraintException;
+import com.wiiy.hibernate.Filter;
+import com.wiiy.hibernate.Result;
+import com.wiiy.hibernate.UKConstraintException;
+<#list importPackages as importPackage> 
+import ${importPackage};
+</#list>
+
+/**
+ * @author my
+ */
+public class ${className}ServiceImpl implements ${className}Service{
+	
+	private ${className}Dao ${variableName}Dao;
+	
+	public void set${className}Dao(${className}Dao ${variableName}Dao) {
+		this.${variableName}Dao = ${variableName}Dao;
+	}
+
+	@Override
+	public Result<${className}> save(${className} t) {
+		try {
+			t.setCreateTime(new Date());
+			t.setCreator(${moduleName}Activator.getSessionUser().getRealName());
+			t.setCreatorId(${moduleName}Activator.getSessionUser().getId());
+			t.setModifyTime(t.getCreateTime());
+			t.setModifier(t.getCreator());
+			t.setModifierId(t.getCreatorId());
+			t.setEntityStatus(EntityStatus.NORMAL);
+			${variableName}Dao.save(t);
+			return Result.success(R.${className}.SAVE_SUCCESS);
+		} catch (UKConstraintException e) {
+			e.printStackTrace();
+			return Result.failure(R.getUKMessage(BeanUtil.getFieldDescriptionByColumnName(e.getUK(),${className}.class)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.SAVE_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<${className}> delete(${className} t) {
+		try {
+			${variableName}Dao.delete(t);
+			return Result.success(R.${className}.DELETE_SUCCESS);
+		} catch (FKConstraintException e) {
+			e.printStackTrace();
+			return Result.failure(${moduleName}Activator.getFKMessage(e.getFK()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.DELETE_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<${className}> deleteById(Serializable id) {
+		try {
+			${variableName}Dao.deleteById(id);
+			return Result.success(R.${className}.DELETE_SUCCESS);
+		} catch (FKConstraintException e) {
+			e.printStackTrace();
+			return Result.failure(${moduleName}Activator.getFKMessage(e.getFK()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.DELETE_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<${className}> deleteByIds(String ids) {
+		try {
+			${variableName}Dao.deleteByIds(ids);
+			return Result.success(R.${className}.DELETE_SUCCESS);
+		} catch (FKConstraintException e) {
+			e.printStackTrace();
+			return Result.failure(${moduleName}Activator.getFKMessage(e.getFK()));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.DELETE_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<${className}> update(${className} t) {
+		try {
+			t.setModifyTime(new Date());
+			t.setModifier(${moduleName}Activator.getSessionUser().getRealName());
+			t.setModifierId(${moduleName}Activator.getSessionUser().getId());
+			${variableName}Dao.update(t);
+			return Result.success(R.${className}.UPDATE_SUCCESS);
+		} catch (UKConstraintException e) {
+			e.printStackTrace();
+			return Result.failure(R.getUKMessage(BeanUtil.getFieldDescriptionByColumnName(e.getUK(),${className}.class)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.UPDATE_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<${className}> getBeanById(Serializable id) {
+		try {
+			return Result.value(${variableName}Dao.getBeanById(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.LOAD_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<${className}> getBeanByFilter(Filter filter) {
+		try {
+			return Result.value(${variableName}Dao.getBeanByFilter(filter));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.LOAD_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<List<${className}>> getList() {
+		try {
+			return Result.value(${variableName}Dao.getList());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.LOAD_FAILURE);
+		}
+	}
+
+	@Override
+	public Result<List<${className}>> getListByFilter(Filter filter) {
+		try {
+			return Result.value(${variableName}Dao.getListByFilter(filter));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Result.failure(R.${className}.LOAD_FAILURE);
+		}
+	}
+
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.wiiy.estate.entity.FixFee">
+    	<meta attribute="class-description">维护费用</meta> 
+    	<meta attribute="extends">com.wiiy.commons.entity.TreeEntity</meta>
+		<id name="id" unsaved-value="-1" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		<property name="propertyId" type="java.lang.Long">
+			<column name="property_id">
+				<comment>物业报修外键</comment>
+			</column>
+		</property>
+		<property name="status">
+            <column name="status">
+				<comment>状态</comment>
+			</column>
+            <type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.estate.preferences.enums.PropertyFixStatusEnum</param>
+				<param name="type">12</param>
+			</type>
+        </property>
+		<property name="difficulty">
+			<column name="difficulty" sql-type="varchar(50)">
+				<comment>难度</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.estate.preferences.enums.FixDifficultyEnum</param>
+				<param name="type">12</param>
+			</type>	
+		</property>
+		<property name="satisficing">
+			<column name="satisficing" sql-type="varchar(50)">
+				<comment>满意度</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.estate.preferences.enums.SatisficingEnum</param>
+				<param name="type">12</param>
+			</type>	
+		</property>
+		<property name="finishTime" type="java.util.Date">
+			<column name="finish_time">
+				<comment>完工日期</comment>
+			</column>
+		</property>
+		<property name="maintainer" type="java.lang.String">
+			<column name="maintainer">
+				<comment>维修人员</comment>
+			</column>
+		</property>
+		<property name="maintainerOrg" type="java.lang.String">
+			<column name="maintainer_org">
+				<comment>维修人员所属单位</comment>
+			</column>
+		</property>
+		<property name="laborCosts" type="java.lang.Double">
+			<column name="labor_costs" precision="2">
+				<comment>人工费用</comment>
+			</column>
+		</property>
+		<property name="materialCosts" type="java.lang.Double">
+			<column name="material_costs" precision="2">
+				<comment>材料费用</comment>
+			</column>
+		</property>
+		<property name="result" type="java.lang.String">
+			<column name="result"  length="512">
+				<comment>维修结果</comment>
+			</column>
+		</property>
+		<property name="rectification" type="java.lang.String">
+			<column name="rectification"  length="512">
+				<comment>整改意见</comment>
+			</column>
+		</property>
+		<property name="memo" type="java.lang.String">
+			<column name="memo" length="512">
+				<comment>备注</comment>
+			</column>
+		</property>
+		
+		<property name="entityStatus">
+        	<column name="entity_status">
+				<comment>实体状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.EntityStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="create_time">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="creator" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator">
+				<comment>创建人姓名</comment>
+			</column>
+		</property>
+		<property name="creatorId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator_id">
+				<comment>创建人ID</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="modify_time">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="modifier" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier">
+				<comment>修改人姓名</comment>
+			</column>
+		</property>
+		<property name="modifierId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier_id">
+				<comment>修改人ID</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

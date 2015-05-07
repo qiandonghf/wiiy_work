@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="rvalue" type="json1">
+				<param name="root">result.value</param>
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="login">/web/login.jsp</result>
+		</global-results>
+	</package>
+	<package name="synthesis" namespace="/" extends="root">
+		<action name="project" class="projectAction">
+			<result name="view">/web/project/project_view.jsp</result>
+			<result name="edit">/web/project/project_edit.jsp</result>
+			<result name="contractAdd">/web/contract/contract_add_by_id.jsp</result>
+		</action>
+		<action name="contract" class="contractAction">
+			<result name="view">/web/contract/contract_view.jsp</result>
+			<result name="edit">/web/contract/contract_edit.jsp</result>
+			<result name="editById">/web/contract/contract_edit_by_id.jsp</result>
+			<result name="viewById">/web/contract/contract_view_by_id.jsp</result>
+		</action>
+		<action name="billPlanRent" class="billPlanRentAction">
+			<result name="view">/web/contract/billPlanRent_view.jsp</result>
+			<result name="edit">/web/contract/billPlanRent_edit.jsp</result>
+		</action>
+		<action name="contractAtt" class="contractAttAction">
+			<result name="view">/web/contract/contractAtt_view.jsp</result>
+			<result name="edit">/web/contract/contractAtt_edit.jsp</result>
+		</action>
+		<action name="billRent" class="billRentAction">
+			<result name="add">/web/contract/billRent_add.jsp</result>
+			<result name="view">/web/contract/billRent_view.jsp</result>
+			<result name="edit">/web/contract/billRent_edit.jsp</result>
+		</action>
+		<action name="customer" class="customerAction">
+			<result name="add">/web/customer/customer_add.jsp</result>
+			<result name="view">/web/customer/customer_view.jsp</result>
+			<result name="edit">/web/customer/customer_edit.jsp</result>
+		</action>
+		<action name="plan" class="planAction">
+			<result name="add">/web/project/project_plan_add.jsp</result>
+			<result name="view">/web/project/project_plan_view.jsp</result>
+			<result name="edit">/web/project/project_plan_edit.jsp</result>
+		</action>
+		<action name="fact" class="factAction">
+			<result name="add">/web/project/project_fact_add.jsp</result>
+			<result name="view">/web/project/project_fact_view.jsp</result>
+			<result name="edit">/web/project/project_fact_edit.jsp</result>
+		</action>
+		<action name="seal" class="sealAction">
+			<result name="add">/web/seal/seal_add.jsp</result>
+			<result name="view">/web/seal/seal_view.jsp</result>
+			<result name="edit">/web/seal/seal_edit.jsp</result>
+			<result name="select">/web/seal/multiSelector.jsp</result>
+		</action>
+		<action name="sealRegistration" class="sealRegistrationAction">
+			<result name="add">/web/seal/sealRegistration_add.jsp</result>
+			<result name="view">/web/seal/sealRegistration_view.jsp</result>
+			<result name="edit">/web/seal/sealRegistration_edit.jsp</result>
+			<result name="list">/web/seal/sealRegistration_list.jsp</result>
+			<result name="applyedit">/web/seal/sealApply_edit.jsp</result>
+		</action>
+		<action name="car" class="carAction">
+			<result name="add">/web/car/Vehicle_add.jsp</result>
+			<result name="view">/web/car/Vehicle_view.jsp</result>
+			<result name="edit">/web/car/Vehicle_edit.jsp</result>
+			<result name="carSelect">/web/car/car_selector.jsp</result>
+			<result name="select">/web/car/multiSelector.jsp</result>
+		</action>
+		<action name="appraisalAtt" class="appraisalAttAction">
+			<result name="add">/web/appraisal/appraisal_add.jsp</result>
+			<result name="view">/web/appraisal/appraisal_view.jsp</result>
+			<result name="edit">/web/appraisal/appraisal_edit.jsp</result>
+		</action>
+		<action name="appraisal" class="appraisalAction">
+			<result name="add">/web/appraisal/appraisal_add.jsp</result>
+			<result name="view">/web/appraisal/appraisal_view.jsp</result>
+			<result name="edit">/web/appraisal/appraisal_edit.jsp</result>
+		</action>
+		<action name="roster" class="rosterAction">
+			<result name="add">/web/roster/roster_add.jsp</result>
+			<result name="view">/web/roster/roster_view.jsp</result>
+			<result name="edit">/web/roster/roster_edit.jsp</result>
+		</action>
+		<action name="laborContract" class="laborContractAction">
+			<result name="add">/web/roster/laborContract_add.jsp</result>
+			<result name="view">/web/roster/laborContract_view.jsp</result>
+		</action>
+		<action name="carFix" class="carFixAction">
+			<result name="edit">/web/car/Vehicle_maintenance_edit.jsp</result>
+			<result name="view">/web/car/Vehicle_maintenance_view.jsp</result>
+		</action>
+		<action name="carApply" class="carApplyAction">
+			<result name="all">/web/car/Vehicle_applications_list.jsp</result>
+			<result name="apply">/web/car/Vehicle_applications_list.jsp</result>
+			<result name="registration">/web/car/Vehicle_applications_list.jsp</result>
+			<result name="edit">/web/car/Vehicle_applications_edit.jsp</result>
+			<result name="view">/web/car/Vehicle_applications_view.jsp</result>
+		</action>
+		<action name="rosterAtt" class="rosterAttAction">
+			<result name="add">/web/roster/accessory_add.jsp</result>
+		</action>
+		
+		<action name="schedule" class="scheduleAction">
+			<result name="remind">/web/workmanage/schedule_remind.jsp</result>
+			<result name="list">/web/workmanage/schedule_list.jsp</result>
+			<result name="edit">/web/workmanage/schedule_edit.jsp</result>
+			<result name="view">/web/workmanage/schedule_view.jsp</result>
+		</action>
+		<action name="workDayReport" class="workDayReportAction">
+			<result name="addDayReport">/web/workmanage/workReportDay_add.jsp</result>
+			<result name="editDay">/web/workmanage/workReportDay_edit.jsp</result>
+			<result name="viewByDay">/web/workmanage/dayReportInfo.jsp</result>
+			<result name="dayCountList">/web/workmanage/workcount_day.jsp</result>
+			<result name="depCountList">/web/workmanage/depWorkCount_day.jsp</result>
+			<result name="viewDepWork">/web/workmanage/viewDepWork_day.jsp</result>
+			<result name="employeeCountList">/web/workmanage/employeeCount_day.jsp</result>
+		</action>
+		<action name="task" class="taskAction">
+			<result name="myWork">/web/task2/task_todowork.jsp</result>
+			<result name="mySendTaskList">/web/task2/task_mySend.jsp</result>
+			<result name="myPendingList">/web/task2/task_pending.jsp</result>
+			<result name="mySignTaskList">/web/task2/task_sign.jsp</result>
+			<result name="finishWork">/web/task2/task_finish.jsp</result>
+			<result name="list">/web/task2/task_list1.jsp</result>
+			<result name="add">/web/task/task_add.jsp</result>
+			<result name="edit">/web/task/task_edit.jsp</result>
+			<result name="view">/web/task/task_view.jsp</result>
+			<result name="depList">/web/task2/task_dep.jsp</result>
+ 			<result name="projectList">/web/task2/task_project.jsp</result> 
+ 			<result name="employeeList">/web/task2/task_employee.jsp</result> 
+			<result name="viewFinishWork">/web/task2/myFinishWork_list.jsp</result>
+			<result name="viewDepart">/web/task2/departWork_list.jsp</result>
+			<result name="viewProject">/web/task2/projectWork_list.jsp</result>
+			<result name="viewEmployee">/web/task2/employeeWorkList.jsp</result>
+			<result name="deskTopPendingTask">/web/desktop/deskTopPendingTask.jsp</result>
+		</action>
+				
+		<action name="taskLog" class="taskLogAction">
+			<result name="edit">/web/task/taskLog_edit.jsp</result>
+			<result name="view">/web/task/taskLog_view.jsp</result>
+		</action>
+		<action name="taskAppoint" class="taskAppointAction">
+		</action>
+		
+		<action name="taskAtt" class="taskAttAction">
+		</action>
+		
+		<action name="taskDepartConfig" class="taskDepartConfigAction">
+		</action>
+		
+		<action name="taskDepart" class="taskDepartAction">
+			<result name="select">/web/task/taskDepart_selector.jsp</result>
+			<result name="edit">/web/task/taskDepart_edit.jsp</result>
+			<result name="list">/web/task/task_dep_list.jsp</result>
+		</action>
+		
+		<action name="taskProject" class="taskProjectAction">
+			<result name="select">/web/task/taskProject_selector.jsp</result>
+			<result name="edit">/web/task/taskProject_edit.jsp</result>		
+			<result name="list">/web/task/task_project_list.jsp</result>		
+		</action>
+		<action name="workReport" class="workReportAction">
+			<result name="addWeekReport">/web/workmanage/workReportAdd.jsp</result>
+			<result name="addMonthReport">/web/workmanage/workReportAdd_month.jsp</result>
+			<result name="list">/web/workmanage/workReport.jsp</result>
+			<result name="editMonth">/web/workmanage/workReportMonth_edit.jsp</result>
+			<result name="editWeek">/web/workmanage/workReport_edit.jsp</result>
+			<result name="viewByMonth">/web/workmanage/monthlyinfo.jsp</result>
+			<result name="viewByWeek">/web/workmanage/weeklyinfo.jsp</result>
+			<result name="configMonthReport">/web/workmanage/monthlyinfo.jsp</result>
+			<result name="configWeekReport">/web/workmanage/weeklyinfo.jsp</result>
+			<result name="workCount">/web/workmanage/workcount.jsp</result>
+			<result name="employeeCount">/web/workmanage/employeeCount.jsp</result>
+			<result name="employeeMonthCount">/web/workmanage/employeeCount_moth.jsp</result>
+			<result name="workMonthCount">/web/workmanage/worlcount_moth.jsp</result>
+			<result name="myWorkReportList">/web/desktop/deskTop_workReport.jsp</result>
+			<result name="depWeekCountList">/web/workmanage/depWorkCount_week.jsp</result>
+			<result name="viewDepWeek">/web/workmanage/viewDepWork_week.jsp</result>
+			<result name="depMonthCountList">/web/workmanage/depWorkCount_month.jsp</result>
+			<result name="viewDepMonth">/web/workmanage/viewDepWork_month.jsp</result>
+			
+			<result name="selectPersonReport">/web/workmanage/exportPerson.jsp</result>
+			<result name="selectDepReport">/web/workmanage/exportDep.jsp</result>
+			
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${excelName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="workReportConfig" class ="workReportConfigAction">
+		</action>
+		<action name="workArrange" class="workArrangeAction">
+			<result name="list">/web/personnel/scheduling_list.jsp</result>
+			<result name="add">/web/personnel/scheduling_add.jsp</result>
+			<result name="edit">/web/personnel/scheduling_edit.jsp</result>
+			<result name="view">/web/personnel/scheduling_view.jsp</result>
+		</action>
+		
+		<action name="workClass" class="workClassAction">
+			<result name="edit">/web/personnel/frequency_edit.jsp</result>
+			<result name="view">/web/personnel/frequency_view.jsp</result>
+		</action>
+		
+		<action name="workSchedule" class="workScheduleAction">
+			<result name="edit">/web/personnel/shifts_edit.jsp</result>
+			<result name="view">/web/personnel/shifts_view.jsp</result>
+		</action>
+		
+		<action name="userSign" class="userSignAction">
+			<result name="viewInfo">/web/personnel/attendance_list_count.jsp</result>
+			<result name="add">/web/personnel/attendance_add.jsp</result>
+			<result name="edit">/web/personnel/attendance_edit.jsp</result>
+			<result name="view">/web/personnel/attendance_view.jsp</result>
+		</action>
+		
+		<action name="mail" class="mailAction">
+			<result name="searchMail">/web/communication/mail_search.jsp</result>
+			<result name="sendMail">/web/communication/write_add.jsp</result>
+			<result name="mailRelay">/web/communication/write_add.jsp</result>
+			<result name="list">/web/communication/write_list.jsp</result>
+			<result name="mail">/web/communication/write_message.jsp</result>
+			<result name="errorPage">/web/communication/info.jsp</result>
+			<result name="downloadAttachment" type="stream"> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		
+		<action name="card" class="cardAction">
+			<result name="selectCard">/web/communication/contact_multiSelector.jsp</result>
+			<result name="addCard">/web/communication/contacts_add.jsp</result>
+			<result name="view">/web/communication/contact_view.jsp</result>
+			<result name="edit">/web/communication/contact_edit.jsp</result>
+			<result name="copyCard">/web/communication/contact_copy.jsp</result>
+			<result name="moveCard">/web/communication/contact_move.jsp</result>
+		</action>		
+		
+		<action name="cardCategory" class="cardCategoryAction">
+			<result name="addCategory">/web/communication/contacts_category_addByParentId.jsp</result>
+			<result name="addMyCategory">/web/communication/contacts_category_addByMyId.jsp</result>
+			<result name="list">/web/communication/contacts_list.jsp</result>
+			<result name="addCard">/web/communication/contacts_add.jsp</result>
+			<result name="edit">/web/communication/contacts_category_edit.jsp</result>
+		</action>
+		
+		<action name="sms" class="smsAction">
+			<result name="smsPage">/web/communication/sms.jsp</result>
+		</action>		
+		<action name="smsReceiver" class="smsReceiverAction">
+		</action>
+		<action name="smsTemplate" class="smsTemplateAction">
+			<result name="list">/web/communication/sms_template.jsp</result>
+			<result name="edit">/web/communication/sms_template_edit.jsp</result>
+			<result name="view">/web/communication/sms_template_view.jsp</result>
+		</action>
+		
+		<!-- 公告 -->
+		<action name="notice" class="noticeAction">
+			<result name="edit">/web/information/notice_edit.jsp</result>
+			<result name="view">/web/information/notice_view.jsp</result>
+			<result name="viewOnDesktop">/web/desktop/notice_deskTopView.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="noticeAtt" class="noticeAttAction">
+			
+		</action>
+	</package>
+</struts>

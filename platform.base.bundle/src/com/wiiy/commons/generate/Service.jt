@@ -1,0 +1,12 @@
+package ${parentPackage}.service;
+
+import com.wiiy.commons.service.IService;
+<#list importPackages as importPackage> 
+import ${importPackage};
+</#list>
+
+/**
+ * @author my
+ */
+public interface ${className}Service extends IService<${className}> {
+}

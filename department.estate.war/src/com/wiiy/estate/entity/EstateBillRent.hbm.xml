@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 
+    <class name="com.wiiy.engineering.entity.EngineeringBillRent">
+        <meta attribute="class-description">物业部合同实际结算</meta> 
+    	<meta attribute="extends">com.wiiy.commons.entity.BaseEntity</meta>
+		<id name="id" unsaved-value="-1" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		<property name="contractId" type="java.lang.Long">
+			<column name="contract_id">
+				<comment>合同外键</comment>
+			</column>
+		</property>
+        <many-to-one name="contract" class="com.wiiy.engineering.entity.EngineeringContract" foreign-key="fk_bill_rent_contract" insert="false" update="false" fetch="join">
+            <column name="contract_id">
+                <comment>合同</comment>
+            </column>
+        </many-to-one>
+		<property name="billPlanRentId" type="java.lang.Long">
+			<column name="bill_plan_rent_id">
+				<comment>结算安排外键</comment>
+			</column>
+		</property>
+        <many-to-one name="billPlanRent" class="com.wiiy.engineering.entity.EngineeringBillPlanRent" foreign-key="fk_rent_bill_plan_rent" insert="false" update="false" fetch="join">
+            <column name="bill_plan_rent_id">
+                <comment>结算安排</comment>
+            </column>
+        </many-to-one>
+        <property name="code" type="java.lang.String">
+			<column name="code">
+				<comment>编号</comment>
+			</column>
+		</property>
+		<property name="completeFee" type="java.lang.Double">
+			<column name="complete_fee" precision="10" scale="2">
+				<comment>已结算总和</comment>
+			</column>
+		</property>
+        <property name="settlementDate" type="java.util.Date">
+			<column name="settlement_date" length="19">
+				<comment>结算日期</comment>
+			</column>
+		</property>
+		<property name="settlementFee" type="java.lang.Double">
+			<column name="settlement_fee" precision="10" scale="2">
+				<comment>金额</comment>
+			</column>
+		</property>
+		<property name="payment">
+			<column name="payment">
+				<comment>收付方向</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.common.preferences.enums.PaymentTypeEnum</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="settlement">
+			<column name="settlement">
+				<comment>结算方式</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.common.preferences.enums.SettlementTypeEnum</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="settlementType">
+			<column name="settlement_type">
+				<comment>结算性质</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.common.preferences.enums.SettlementNatureEnum</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="audit">
+			<column name="audit" sql-type="varchar(50)">
+				<comment>是否已审核</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.BooleanEnum</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="paid">
+			<column name="paid" sql-type="varchar(50)">
+				<comment>是否已付款</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.BooleanEnum</param>
+				<param name="type">12</param>
+			</type>		
+		</property>
+		<property name="memo" type="java.lang.String" length="1024">
+            <column name="memo" sql-type="text">
+                <comment>备注</comment>
+            </column>
+        </property>
+        
+		<property name="entityStatus">
+        	<column name="entity_status">
+				<comment>实体状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.EntityStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="create_time">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="creator" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator">
+				<comment>创建人姓名</comment>
+			</column>
+		</property>
+		<property name="creatorId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator_id">
+				<comment>创建人ID</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="modify_time">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="modifier" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier">
+				<comment>修改人姓名</comment>
+			</column>
+		</property>
+		<property name="modifierId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier_id">
+				<comment>修改人ID</comment>
+			</column>
+		</property>
+    </class>
+</hibernate-mapping>

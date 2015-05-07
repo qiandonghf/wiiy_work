@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.objectFactory.delegate" value="springOsgi" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.multipart.maxSize" value="524288000"></constant><!-- 500M -->
+	<package name="root" extends="json-default" namespace="/">
+		<result-types><!-- 定义json类型 --> 
+		    <result-type name="json1" class="com.wiiy.json.JsonResult" />
+		</result-types> 
+		<global-results>
+			<result name="json" type="json1">
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="rvalue" type="json1">
+				<param name="root">result.value</param>
+				<param name="enumAsBean">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="login">/web/login.jsp</result>
+		</global-results>
+	</package>
+	<package name="common" namespace="/" extends="root">
+		<action name="park" class="parkAction">
+			<result name="parkFeeList">/web/building/editFeeList.jsp</result>
+			<result name="energyFeeList">/web/building/park_energy_feeList.jsp</result>
+			<result name="edit">/web/building/park_edit.jsp</result>
+			<result name="list">/web/building/park_list.jsp</result>
+		</action>
+		<action name="building" class="buildingAction">
+			<result name="graph">/web/desktop/building_graph.jsp</result>
+			<result name="rentGraph">/web/desktop/building_rent_graph.jsp</result>
+			<result name="view">/web/building/building_view.jsp</result>
+			<result name="add">/web/building/building_add.jsp</result>
+			<result name="edit">/web/building/building_edit.jsp</result>
+			<result name="pandect">/web/statistic/building_pandect.jsp</result>
+			<result name="rent">/web/statistic/building_rent.jsp</result>
+		</action>
+		<action name="floor" class="floorAction">
+			<result name="listByBuildingId">/web/building/floors_editor.jsp</result>
+			<result name="floorView">/web/building/floor_view.jsp</result>
+		</action>
+		<action name="room" class="roomAction">
+			<result name="select">/web/building/room_selector.jsp</result>
+			<result name="add">/web/building/room_add.jsp</result>
+			<result name="addRoom">/web/building/building_room_add.jsp</result>
+			<result name="edit">/web/building/room_edit.jsp</result>
+			<result name="view">/web/building/room_view.jsp</result>
+			<result name="info">/web/building/room_info.jsp</result>
+			<result name="listByBuildingId">/web/building/room_list_by_buildingId.jsp</result>
+			<result name="property_repair_add">/web/property/property_repair_add.jsp</result>
+			<result name="rentDetail">/web/statistic/building_rentDetail.jsp</result>
+			<result name="parkmanageList">/web/statistic/parkmanageList.jsp</result>
+			<result name="loadCusInfoByRoomId">/web/building/room_customerInfo.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="roomMemo" class="roomMemoAction">
+			<result name="edit">/web/building/roomMemo_edit.jsp</result>
+			<result name="view">/web/building/roomMemo_view.jsp</result>
+		</action>
+		<action name="roomAtt" class="roomAttAction">
+			<result name="edit">/web/building/roomAtt_edit.jsp</result>
+			<result name="view">/web/building/roomAtt_view.jsp</result>
+		</action>
+		<action name="roomChangeLog" class="roomChangeLogAction">
+		</action>
+		<action name="roomFee" class="roomFeeAction">
+			<result name="edit">/web/building/room_editFees_wy.jsp</result>
+			<result name="editRoomFees">/web/building/room_editFees.jsp</result>
+			<result name="editRoomFee">/web/building/room_editFee.jsp</result>
+		</action>
+		<action name="roomHistory" class="roomHistoryAction">
+		</action>
+		
+		<action name="roomMonitor" class="roomMonitorAction">
+			<result name="edit">/web/building/room_followup_edit.jsp</result>
+			<result name="view">/web/building/room_followup_view.jsp</result>
+		</action>
+		
+		<action name="bill" class="billAction">
+			<result name="BILLING">/web/bill/bill_list_billing.jsp</result>
+			<result name="REMINDBILL">/web/bill/bill_list_remind.jsp</result>
+			<result name="invoiceById">/web/bill/bill_invoice.jsp</result>
+			<result name="inInformList">/web/bill/bill_in_informList.jsp</result>
+			<result name="printPayMentIn">/web/bill/bill_in_printPayMentIn.jsp</result>
+			<result name="printPayMentOut">/web/bill/bill_in_printPayMentOut.jsp</result>
+			<result name="printCustomerBill">/web/bill/bill_print_customer.jsp</result>
+			<result name="customerBillList">/web/bill/bill_list_customer.jsp</result>
+			<result name="measure">/web/bill/bill_measure.jsp</result>
+			<result name="arrearAlert">/web/bill/bill_arrearAlert.jsp</result>
+			<result name="outInformList">/web/bill/bill_out_informList.jsp</result>
+			<result name="confirm">/web/bill/bill_confirm.jsp</result>
+			<result name="listByCustomerId">/web/bill/bill_list_by_customerId.jsp</result>
+			<result name="list">/web/bill/bill_list.jsp</result>
+			<result name="listOnDeskTop">/web/bill/bill_list_onDesktop.jsp</result>
+			<result name="in">/web/bill/bill_in.jsp</result>
+			<result name="out">/web/bill/bill_out.jsp</result>
+			<result name="checkoutListBillPlanRent">/web/bill/bill_checkout_list_billPlanRent.jsp</result>
+			<result name="checkoutListDeposit">/web/bill/bill_checkout_list_deposit.jsp</result>
+			<result name="checkoutListBillPlanFacility">/web/bill/bill_checkout_list_billPlanFacility.jsp</result>
+			<result name="checkout">/web/bill/bill_checkout.jsp</result>
+			<result name="edit">/web/bill/bill_edit.jsp</result>
+			<result name="view">/web/bill/bill_view.jsp</result>
+			<result name="monthBill">/web/statistic/bill_form_list_month.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="billType" class="billTypeAction">
+			<result name="edit">/web/bill/billType_edit.jsp</result>
+			<result name="view">/web/bill/billType_view.jsp</result>
+		</action>
+		<action name="billRemind" class="billRemindAction">
+			<result name="view">/web/bill/billRemind_view.jsp</result>
+		</action>
+		
+		<action name="statistic" class="statisticAction">
+			<result name="index">/web/statistic/statistic_index.jsp</result>
+			<result name="customerParkStatus">/web/statistic/customerParkStatus.jsp</result>
+			<result name="customerIncubationStatus">/web/statistic/customerIncubationStatus.jsp</result>
+			<result name="customerTechnic">/web/statistic/customerTechnic.jsp</result>
+			<result name="customerLabel">/web/statistic/customerLabel.jsp</result>
+			<result name="productTechnic">/web/statistic/productTechnic.jsp</result>
+			<result name="registeredCapital">/web/statistic/registeredCapital.jsp</result>
+			<result name="customerStaffer">/web/statistic/customerStaffer.jsp</result>
+			<result name="propertyRight">/web/statistic/propertyRight.jsp</result>
+			<result name="customerContract">/web/statistic/customerContract.jsp</result>
+			<result name="billCostByDay">/web/statistic/bill_form_list_day.jsp</result>
+			<result name="billCostByMonth">/web/statistic/bill_form_list_month.jsp</result>
+			<result name="billCostByYear">/web/statistic/bill_form_list_year.jsp</result>
+			<result name="billCostByCustomer">/web/statistic/bill_form_list_person.jsp</result>
+			<result name="billCostByProperty">/web/statistic/bill_form_list_property.jsp</result>
+			<result name="billWzubCostByProperty">/web/statistic/bill_form_list_property_wzub.jsp</result>
+			<result name="export" type="stream"> 
+				<param name="contentType">application/vnd.ms-excel</param> 
+				<param name="inputName">inputStream</param> 
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+	</package>
+</struts>

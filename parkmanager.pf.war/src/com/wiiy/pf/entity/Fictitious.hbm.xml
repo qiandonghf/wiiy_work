@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.wiiy.pf.entity.Fictitious" table="act_fictitious">
+    	<meta attribute="class-description">入驻审批单</meta> 
+    	<meta attribute="extends">com.wiiy.commons.entity.BaseEntity</meta>
+		<id name="id" unsaved-value="-1" type="java.lang.Long">
+			<generator class="native" />
+		</id>
+		<property name="investmentName" type="java.lang.String">
+			<column name="investment_Name">
+				<comment>公司名称</comment>
+			</column>
+		</property>
+		<property name="investmentId" type="java.lang.Long">
+			<column name="investment_id">
+				<comment>公司ID</comment>
+			</column>
+		</property>
+		<property name="customerId" type="java.lang.Long">
+			<column name="customer_id">
+				<comment>企业ID</comment>
+			</column>
+		</property>
+		<property name="contractId" type="java.lang.Long">
+			<column name="contract_id">
+				<comment>合同ID</comment>
+			</column>
+		</property>
+		<property name="managerAddress" type="java.lang.String">
+			<column name="manager_address">
+				<comment>实际经营地址</comment>
+			</column>
+		</property>
+		<property name="legalPerson" type="java.lang.String">
+			<column name="legal_person">
+				<comment>法人代表</comment>
+			</column>
+		</property>
+		<property name="regCapital" type="java.lang.Double">
+        	<column name="reg_capital">
+        		<comment>注册资本</comment>
+        	</column>
+        </property>
+		<property name="contect" type="java.lang.String">
+			<column name="contect">
+				<comment>联系人</comment>
+			</column>
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="phone">
+				<comment>办公电话</comment>
+			</column>
+		</property>
+		<property name="mobile" type="java.lang.String">
+			<column name="mobile">
+				<comment>手机</comment>
+			</column>
+		</property>
+		<property name="fax" type="java.lang.String">
+			<column name="fax">
+				<comment>传真</comment>
+			</column>
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="content">
+				<comment>内容</comment>
+			</column>
+		</property>
+		<property name="introduce" type="java.lang.String">
+			<column name="introduce" sql-type="text">
+				<comment>企业经营范围及规模、优势、前景等情况介绍</comment>
+			</column>
+		</property>
+		<property name="suggestion" type="java.lang.String">
+			<column name="suggestion" sql-type="text">
+				<comment>本公司引荐人或推荐单位意见</comment>
+			</column>
+		</property>
+		
+		<property name="processInstanceId" type="java.lang.String">
+			<column name="processInstanceId">
+				<comment>流程实例ID</comment>
+			</column>
+		</property>
+		
+		<property name="startUserId" type="java.lang.String">
+			<column name="start_user_id">
+				<comment>发起人ID</comment>
+			</column>
+		</property>
+		<property name="startUserName" type="java.lang.String">
+			<column name="start_user_name">
+				<comment>发起人姓名</comment>
+			</column>
+		</property>
+		
+		<property name="applyTime" type="java.util.Date">
+			<column name="applyTime">
+				<comment>申请时间</comment>
+			</column>
+		</property>
+		
+		<property name="ywyOpinion" type="java.lang.String">
+			<column name="ywy_opinion" length="512">
+				<comment>业务员意见</comment>
+			</column>
+		</property>
+		 <property name="inpark">
+			<column name="inpark" sql-type="varchar(50)">
+				<comment>是否在园内</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.BooleanEnum</param>
+				<param name="type">12</param>
+			</type>		
+		</property>
+		
+		<property name="subjectRentIds" type="java.lang.String">
+			<column name="subjectRent_ids" length="512">
+				<comment>租赁标的id</comment>
+			</column>
+		</property>
+		<property name="billPlanRentIds" type="java.lang.String">
+			<column name="billPlanRent_ids" length="512">
+				<comment>资金计划id</comment>
+			</column>
+		</property>
+		<property name="depositIds" type="java.lang.String">
+			<column name="deposit_ids" length="512">
+				<comment>押金id</comment>
+			</column>
+		</property>
+		
+		<property name="entityStatus">
+        	<column name="entity_status">
+				<comment>实体状态</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.wiiy.commons.preferences.enums.EntityStatus</param>
+				<param name="type">12</param>
+			</type>
+		</property>
+		<property name="createTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="create_time">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="creator" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator">
+				<comment>创建人姓名</comment>
+			</column>
+		</property>
+		<property name="creatorId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="creator_id">
+				<comment>创建人ID</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="java.util.Date">
+			<meta attribute="gen-property">false</meta>
+			<column name="modify_time">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="modifier" type="java.lang.String" length="100">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier">
+				<comment>修改人姓名</comment>
+			</column>
+		</property>
+		<property name="modifierId" type="java.lang.Long">
+			<meta attribute="gen-property">false</meta>
+			<column name="modifier_id">
+				<comment>修改人ID</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

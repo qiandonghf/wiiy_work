@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/com/wiiy/sale/action/CustomerAction.java=UTF-8
+encoding//src/com/wiiy/sale/entity/SaleBillPlanRent.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/R.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/CustomerLevelEnum.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/CustomerTypeEnum.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/DemandEnum.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/MotivationEnum.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/OwnerEnum.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/RentEnum.java=UTF-8
+encoding//src/com/wiiy/sale/preferences/enums/SatisfactionEnum.java=UTF-8
+encoding/<project>=UTF-8

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
+	
+	<osgi:reference id="sessionService" interface="com.wiiy.hibernate.SessionService"/>
+	
+	<bean id="synthesisProjectDao" class="com.wiiy.synthesis.dao.SynthesisProjectDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="projectService" class="com.wiiy.synthesis.service.impl.SynthesisProjectServiceImpl">
+		<property name="synthesisProjectDao" ref="synthesisProjectDao"></property>
+	</bean>
+	<bean id="projectAction" class="com.wiiy.synthesis.action.ProjectAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+	</bean>
+	
+	<bean id="synthesisContractDao" class="com.wiiy.synthesis.dao.SynthesisContractDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractService" class="com.wiiy.synthesis.service.impl.SynthesisContractServiceImpl">
+		<property name="synthesisContractDao" ref="synthesisContractDao"></property>
+	</bean>
+	<bean id="contractAction" class="com.wiiy.synthesis.action.ContractAction" scope="prototype">
+		<property name="contractService" ref="contractService"></property>
+	</bean>
+	
+	<bean id="synthesisBillPlanRentDao" class="com.wiiy.synthesis.dao.SynthesisBillPlanRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billPlanRentService" class="com.wiiy.synthesis.service.impl.SynthesisBillPlanRentServiceImpl">
+		<property name="synthesisBillPlanRentDao" ref="synthesisBillPlanRentDao"></property>
+	</bean>
+	<bean id="billPlanRentAction" class="com.wiiy.synthesis.action.BillPlanRentAction" scope="prototype">
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+	</bean>
+	
+	<bean id="synthesisBillRentDao" class="com.wiiy.synthesis.dao.SynthesisBillRentDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="billRentService" class="com.wiiy.synthesis.service.impl.SynthesisBillRentServiceImpl">
+		<property name="synthesisBillRentDao" ref="synthesisBillRentDao"></property>
+	</bean>
+	<bean id="billRentAction" class="com.wiiy.synthesis.action.BillRentAction" scope="prototype">
+		<property name="billPlanRentService" ref="billPlanRentService"></property>
+		<property name="billRentService" ref="billRentService"></property>
+	</bean>
+	
+	<bean id="synthesisContractAttDao" class="com.wiiy.synthesis.dao.SynthesisContractAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="contractAttService" class="com.wiiy.synthesis.service.impl.SynthesisContractAttServiceImpl">
+		<property name="synthesisContractAttDao" ref="synthesisContractAttDao"></property>
+	</bean>
+	<bean id="contractAttAction" class="com.wiiy.synthesis.action.ContractAttAction" scope="prototype">
+		<property name="contractAttService" ref="contractAttService"></property>
+	</bean>
+	
+	<bean id="synthesisCustomerDao" class="com.wiiy.synthesis.dao.SynthesisCustomerDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="customerService" class="com.wiiy.synthesis.service.impl.SynthesisCustomerServiceImpl">
+		<property name="synthesisCustomerDao" ref="synthesisCustomerDao"></property>
+	</bean>
+	<bean id="customerAction" class="com.wiiy.synthesis.action.CustomerAction" scope="prototype">
+		<property name="customerService" ref="customerService"></property>
+	</bean>
+	
+	<bean id="synthesisPlanDao" class="com.wiiy.synthesis.dao.SynthesisPlanDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="planService" class="com.wiiy.synthesis.service.impl.SynthesisPlanServiceImpl">
+		<property name="synthesisPlanDao" ref="synthesisPlanDao"></property>
+	</bean>
+	<bean id="planAction" class="com.wiiy.synthesis.action.PlanAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+		<property name="planService" ref="planService"></property>
+	</bean>
+	
+	<bean id="synthesisFactDao" class="com.wiiy.synthesis.dao.SynthesisFactDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="factService" class="com.wiiy.synthesis.service.impl.SynthesisFactServiceImpl">
+		<property name="synthesisFactDao" ref="synthesisFactDao"></property>
+	</bean>
+	<bean id="factAction" class="com.wiiy.synthesis.action.FactAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+		<property name="factService" ref="factService"></property>
+	</bean>	
+	
+	<bean id="sealDao" class="com.wiiy.synthesis.dao.SealDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="sealService" class="com.wiiy.synthesis.service.impl.SealServiceImpl">
+		<property name="sealDao" ref="sealDao"></property>
+	</bean>
+	<bean id="sealAction" class="com.wiiy.synthesis.action.SealAction" scope="prototype">
+		<property name="sealService" ref="sealService"></property>
+	</bean>
+	<bean id="sealRegistrationAttDao" class="com.wiiy.synthesis.dao.SealRegistrationAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="sealRegistrationAttService" class="com.wiiy.synthesis.service.impl.SealRegistrationAttServiceImpl">
+		<property name="sealRegistrationAttDao" ref="sealRegistrationAttDao"></property>
+	</bean>
+	<bean id="sealRegistrationAttAction" class="com.wiiy.synthesis.action.SealRegistrationAttAction" scope="prototype">
+		<property name="sealRegistrationAttService" ref="sealRegistrationAttService"></property>
+	</bean>
+	<bean id="sealRegistrationDao" class="com.wiiy.synthesis.dao.SealRegistrationDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="sealRegistrationService" class="com.wiiy.synthesis.service.impl.SealRegistrationServiceImpl">
+		<property name="sealRegistrationDao" ref="sealRegistrationDao"></property>
+	</bean>
+	<bean id="sealRegistrationAction" class="com.wiiy.synthesis.action.SealRegistrationAction" scope="prototype">
+		<property name="sealRegistrationService" ref="sealRegistrationService"></property>
+		<property name="sealRegistrationAttService" ref="sealRegistrationAttService"></property>
+	</bean>
+	
+	<bean id="carDao" class="com.wiiy.synthesis.dao.CarDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="carService" class="com.wiiy.synthesis.service.impl.CarServiceImpl">
+		<property name="carDao" ref="carDao"></property>
+	</bean>
+	<bean id="carAction" class="com.wiiy.synthesis.action.CarAction" scope="prototype">
+		<property name="carService" ref="carService"></property>
+	</bean>
+	<bean id="appraisalAttDao" class="com.wiiy.synthesis.dao.AppraisalAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="appraisalAttService" class="com.wiiy.synthesis.service.impl.AppraisalAttServiceImpl">
+		<property name="appraisalAttDao" ref="appraisalAttDao"></property>
+	</bean>
+	<bean id="appraisalAttAction" class="com.wiiy.synthesis.action.AppraisalAttAction" scope="prototype">
+		<property name="appraisalAttService" ref="appraisalAttService"></property>
+	</bean>
+	<bean id="appraisalDao" class="com.wiiy.synthesis.dao.AppraisalDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="appraisalService" class="com.wiiy.synthesis.service.impl.AppraisalServiceImpl">
+		<property name="appraisalDao" ref="appraisalDao"></property>
+	</bean>
+	<bean id="appraisalAction" class="com.wiiy.synthesis.action.AppraisalAction" scope="prototype">
+		<property name="appraisalService" ref="appraisalService"></property>
+		<property name="appraisalAttService" ref="appraisalAttService"></property>
+	</bean>
+	
+	<bean id="userDao" class="com.wiiy.core.dao.UserDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="userService" class="com.wiiy.core.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	
+	<bean id="roleDao" class="com.wiiy.core.dao.RoleDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="roleService" class="com.wiiy.core.service.impl.RoleServiceImpl">
+		<property name="roleDao" ref="roleDao"></property>
+	</bean>
+	
+	<bean id="rosterDao" class="com.wiiy.synthesis.dao.RosterDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="rosterService" class="com.wiiy.synthesis.service.impl.RosterServiceImpl">
+		<property name="rosterDao" ref="rosterDao"></property>
+	</bean>
+		<bean id="rosterAction" class="com.wiiy.synthesis.action.RosterAction" scope="prototype">
+		<property name="roleService" ref="roleService"></property>
+ 		<property name="archivesService" ref="archivesService"></property>
+ 		<property name="rosterService" ref="rosterService"></property>
+	</bean>
+	
+	<bean id="archivesDao" class="com.wiiy.synthesis.dao.ArchivesDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="archivesService" class="com.wiiy.synthesis.service.impl.ArchivesServiceImpl">
+		<property name="archivesDao" ref="archivesDao"></property>
+	</bean>
+	<bean id="archivesAction" class="com.wiiy.synthesis.action.ArchivesAction" scope="prototype">
+		<property name="archivesService" ref="archivesService"></property>
+	</bean>
+	
+	<bean id="laborContractDao" class="com.wiiy.synthesis.dao.LaborContractDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="laborContractService" class="com.wiiy.synthesis.service.impl.LaborContractServiceImpl">
+		<property name="laborContractDao" ref="laborContractDao"></property>
+	</bean>
+	<bean id="laborContractAction" class="com.wiiy.synthesis.action.LaborContractAction" scope="prototype">
+		<property name="laborContractService" ref="laborContractService"></property>
+	</bean>
+	
+	<bean id="laborContractAttDao" class="com.wiiy.synthesis.dao.LaborContractAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="laborContractAttService" class="com.wiiy.synthesis.service.impl.LaborContractAttServiceImpl">
+		<property name="laborContractAttDao" ref="laborContractAttDao"></property>
+	</bean>
+	<bean id="laborContractAttAction" class="com.wiiy.synthesis.action.LaborContractAttAction" scope="prototype">
+		<property name="laborContractAttService" ref="laborContractAttService"></property>
+	</bean>
+
+	<bean id="rosterAttDao" class="com.wiiy.synthesis.dao.RosterAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="rosterAttService" class="com.wiiy.synthesis.service.impl.RosterAttServiceImpl">
+		<property name="rosterAttDao" ref="rosterAttDao"></property>
+	</bean>
+	<bean id="rosterAttAction" class="com.wiiy.synthesis.action.RosterAttAction" scope="prototype">
+		<property name="rosterAttService" ref="rosterAttService"></property>
+	</bean>
+	<bean id="carFixDao" class="com.wiiy.synthesis.dao.CarFixDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="carFixService" class="com.wiiy.synthesis.service.impl.CarFixServiceImpl">
+		<property name="carFixDao" ref="carFixDao"></property>
+	</bean>
+	<bean id="carFixAction" class="com.wiiy.synthesis.action.CarFixAction" scope="prototype">
+		<property name="carFixService" ref="carFixService"></property>
+	</bean>
+	<bean id="carApplyDao" class="com.wiiy.synthesis.dao.CarApplyDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="carApplyService" class="com.wiiy.synthesis.service.impl.CarApplyServiceImpl">
+		<property name="carApplyDao" ref="carApplyDao"></property>
+	</bean>
+	<bean id="carApplyAction" class="com.wiiy.synthesis.action.CarApplyAction" scope="prototype">
+		<property name="carApplyService" ref="carApplyService"></property>
+	</bean>
+	
+	<bean id="scheduleDao" class="com.wiiy.synthesis.dao.ScheduleDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="scheduleService" class="com.wiiy.synthesis.service.impl.ScheduleServiceImpl">
+		<property name="scheduleDao" ref="scheduleDao"></property>
+	</bean>
+	<bean id="scheduleAction" class="com.wiiy.synthesis.action.ScheduleAction" scope="prototype">
+		<property name="scheduleService" ref="scheduleService"></property>
+	</bean>
+	
+	<bean id="taskAttDao" class="com.wiiy.synthesis.dao.TaskAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="taskAttService" class="com.wiiy.synthesis.service.impl.TaskAttServiceImpl">
+		<property name="taskAttDao" ref="taskAttDao"></property>
+	</bean>
+	<bean id="taskAttAction" class="com.wiiy.synthesis.action.TaskAttAction" scope="prototype">
+		<property name="taskAttService" ref="taskAttService"></property>
+	</bean>
+	
+	<bean id="taskDao" class="com.wiiy.synthesis.dao.TaskDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="taskService" class="com.wiiy.synthesis.service.impl.TaskServiceImpl">
+		<property name="taskDao" ref="taskDao"></property>
+	</bean>
+	<bean id="taskAction" class="com.wiiy.synthesis.action.TaskAction" scope="prototype">
+		<property name="taskService" ref="taskService"></property>
+		<property name="taskDepartService" ref="taskDepartService"></property>
+		<property name="taskProjectService" ref="taskProjectService"></property>
+		<property name="taskLogService" ref="taskLogService"></property>
+		<property name="taskDepartConfigService" ref="taskDepartConfigService"></property>
+		<property name="taskAttService" ref="taskAttService"></property>
+	</bean>
+	
+	
+	<bean id="taskDepartDao" class="com.wiiy.synthesis.dao.TaskDepartDao">
+		<property name="SessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="taskDepartService" class="com.wiiy.synthesis.service.impl.TaskDepartServiceImpl">
+		<property name="taskDepartDao" ref="taskDepartDao"></property>
+	</bean>
+	<bean id="taskDepartAction" class="com.wiiy.synthesis.action.TaskDepartAction" scope="prototype">
+		<property name="taskDepartService" ref="taskDepartService"></property>
+	</bean>
+	
+	<bean id="taskProjectDao" class="com.wiiy.synthesis.dao.TaskProjectDao">
+		<property name="SessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="taskProjectService" class="com.wiiy.synthesis.service.impl.TaskProjectServiceImpl">
+		<property name="taskProjectDao" ref="taskProjectDao"></property>
+	</bean>
+	<bean id="taskProjectAction" class="com.wiiy.synthesis.action.TaskProjectAction" scope="prototype">
+		<property name="taskProjectService" ref="taskProjectService"></property>
+	</bean>
+	
+	<bean id="taskDepartConfigDao" class="com.wiiy.synthesis.dao.TaskDepartConfigDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="taskDepartConfigService" class="com.wiiy.synthesis.service.impl.TaskDepartConfigServiceImpl">
+		<property name="taskDepartConfigDao" ref="taskDepartConfigDao"></property>
+	</bean>
+	<bean id="taskDepartConfigAction" class="com.wiiy.synthesis.action.TaskDepartConfigAction" scope="prototype">
+		<property name="taskDepartConfigService" ref="taskDepartConfigService"></property>
+	</bean>
+	
+	<bean id="taskLogDao" class="com.wiiy.synthesis.dao.TaskLogDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="taskLogService" class="com.wiiy.synthesis.service.impl.TaskLogServiceImpl">
+		<property name="taskLogDao" ref="taskLogDao"></property>
+	</bean>
+	<bean id="taskLogAction" class="com.wiiy.synthesis.action.TaskLogAction" scope="prototype">
+		<property name="taskLogService" ref="taskLogService"></property>
+	</bean>
+	
+
+	
+	<bean id="workReportConfigDao" class="com.wiiy.synthesis.dao.WorkReportConfigDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="workReportConfigService" class="com.wiiy.synthesis.service.impl.WorkReportConfigServiceImpl">
+		<property name="workReportConfigDao" ref="workReportConfigDao"></property>
+	</bean>
+	<bean id="workReportConfigAction" class="com.wiiy.synthesis.action.WorkReportConfigAction" scope="prototype">
+		<property name="workReportConfigService" ref="workReportConfigService"></property>
+	</bean>
+	
+	
+	<bean id="workReportDao" class="com.wiiy.synthesis.dao.WorkReportDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="workReportService" class="com.wiiy.synthesis.service.impl.WorkReportServiceImpl">
+		<property name="workReportDao" ref="workReportDao"></property>
+	</bean>
+	<bean id="workReportAction" class="com.wiiy.synthesis.action.WorkReportAction" scope="prototype">
+		<property name="workReportService" ref="workReportService"></property>
+		<property name="workDayReportService" ref="workDayReportService"></property>
+		<property name="workReportConfigService" ref="workReportConfigService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="departService" ref="taskDepartService"></property>
+	</bean>
+	<bean id="workArrangeDao" class="com.wiiy.synthesis.dao.WorkArrangeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="workArrangeService" class="com.wiiy.synthesis.service.impl.WorkArrangeServiceImpl">
+		<property name="workArrangeDao" ref="workArrangeDao"></property>
+	</bean>
+	<bean id="workArrangeAction" class="com.wiiy.synthesis.action.WorkArrangeAction" scope="prototype">
+		<property name="workArrangeService" ref="workArrangeService"></property>
+		<property name="workScheduleService" ref="workScheduleService"></property>
+		<property name="workClassService" ref="workClassService"></property>
+		<property name="userSignService" ref="userSignService"></property>
+	</bean>
+	
+	<bean id="workClassDao" class="com.wiiy.synthesis.dao.WorkClassDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="workClassService" class="com.wiiy.synthesis.service.impl.WorkClassServiceImpl">
+		<property name="workClassDao" ref="workClassDao"></property>
+	</bean>
+	<bean id="workClassAction" class="com.wiiy.synthesis.action.WorkClassAction" scope="prototype">
+		<property name="workClassService" ref="workClassService"></property>
+		<property name="workScheduleService" ref="workScheduleService"></property>
+	</bean>
+	
+	<bean id="workScheduleDao" class="com.wiiy.synthesis.dao.WorkScheduleDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="workScheduleService" class="com.wiiy.synthesis.service.impl.WorkScheduleServiceImpl">
+		<property name="workScheduleDao" ref="workScheduleDao"></property>
+	</bean>
+	<bean id="workScheduleAction" class="com.wiiy.synthesis.action.WorkScheduleAction" scope="prototype">
+		<property name="workScheduleService" ref="workScheduleService"></property>
+		<property name="workClassService" ref="workClassService"></property>
+	</bean>
+
+	<bean id="userSignDao" class="com.wiiy.synthesis.dao.UserSignDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="userSignService" class="com.wiiy.synthesis.service.impl.UserSignServiceImpl">
+		<property name="userSignDao" ref="userSignDao"></property>
+	</bean>
+	<bean id="userSignAction" class="com.wiiy.synthesis.action.UserSignAction">
+		<property name="userSignService" ref="userSignService"></property>
+		<property name="workClassService" ref="workClassService"></property>
+		<property name="workScheduleService" ref="workScheduleService"></property>
+		<property name="workArrangeService" ref="workArrangeService"></property>
+	</bean>
+	<bean id="workDayReportDao" class="com.wiiy.synthesis.dao.WorkDayReportDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="workDayReportService" class="com.wiiy.synthesis.service.impl.WorkDayReportServiceImpl">
+		<property name="workDayReportDao" ref="workDayReportDao"></property>
+	</bean>
+	<bean id="workDayReportAction" class="com.wiiy.synthesis.action.WorkDayReportAction" scope="prototype">
+		<property name="workDayReportService" ref="workDayReportService"></property>
+		<property name="workReportConfigService" ref="workReportConfigService"></property>
+		<property name="taskService" ref="taskService"></property>
+		<property name="departService" ref="taskDepartService"></property>
+	</bean>
+	
+	<!-- 名片夹 -->
+	<bean id="cardDao" class="com.wiiy.synthesis.dao.CardDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="cardService" class="com.wiiy.synthesis.service.impl.CardServiceImpl">
+		<property name="cardDao" ref="cardDao"></property>
+	</bean>
+	<bean id="cardAction" class="com.wiiy.synthesis.action.CardAction" scope="prototype">
+		<property name="cardService" ref="cardService"></property>
+		<property name="cardCategoryService" ref="cardCategoryService"></property>
+	</bean>
+	
+	<bean id="cardCategoryDao" class="com.wiiy.synthesis.dao.CardCategoryDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="cardCategoryService" class="com.wiiy.synthesis.service.impl.CardCategoryServiceImpl">
+		<property name="cardCategoryDao" ref="cardCategoryDao"></property>
+	</bean>
+	<bean id="cardCategoryAction" class="com.wiiy.synthesis.action.CardCategoryAction" scope="prototype">
+		<property name="cardCategoryService" ref="cardCategoryService"></property>
+		<property name="cardService" ref="cardService"></property>
+	</bean>
+	<!-- 邮件 -->
+	<bean id="mailService" class="com.wiiy.synthesis.service.impl.MailServiceImpl">
+	</bean>
+	<bean id="mailAction" class="com.wiiy.synthesis.action.MailAction" scope="prototype">
+		<property name="mailService" ref="mailService"></property>
+	</bean>
+	<!-- 短信 -->
+	<bean id="smsDao" class="com.wiiy.synthesis.dao.SmsDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="smsService" class="com.wiiy.synthesis.service.impl.SmsServiceImpl">
+		<property name="smsDao" ref="smsDao"></property>
+		<property name="smsReceiverDao" ref="smsReceiverDao"></property>
+	</bean>
+	<bean id="smsAction" class="com.wiiy.synthesis.action.SmsAction" scope="prototype">
+		<property name="smsService" ref="smsService"></property>
+		<property name="smsReceiverService" ref="smsReceiverService"></property>
+		<property name="cardCategoryService" ref="cardCategoryService"></property>
+		<property name="cardService" ref="cardService"></property>
+	</bean>
+	<bean id="smsReceiverDao" class="com.wiiy.synthesis.dao.SmsReceiverDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="smsReceiverService" class="com.wiiy.synthesis.service.impl.SmsReceiverServiceImpl">
+		<property name="smsReceiverDao" ref="smsReceiverDao"></property>
+	</bean>
+	<bean id="smsReceiverAction" class="com.wiiy.synthesis.action.SmsReceiverAction" scope="prototype">
+		<property name="smsReceiverService" ref="smsReceiverService"></property>
+		<property name="smsService" ref="smsService"></property>
+	</bean>
+	
+	<bean id="smsTemplateDao" class="com.wiiy.synthesis.dao.SmsTemplateDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="smsTemplateService" class="com.wiiy.synthesis.service.impl.SmsTemplateServiceImpl">
+		<property name="smsTemplateDao" ref="smsTemplateDao"></property>
+	</bean>
+	<bean id="smsTemplateAction" class="com.wiiy.synthesis.action.SmsTemplateAction" scope="prototype">
+		<property name="smsTemplateService" ref="smsTemplateService"></property>
+	</bean>
+	
+	<!-- 公告 -->
+	<bean id="noticeDao" class="com.wiiy.synthesis.dao.NoticeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="noticeService" class="com.wiiy.synthesis.service.impl.NoticeServiceImpl">
+		<property name="noticeDao" ref="noticeDao"></property>
+	</bean>
+	<bean id="noticeAction" class="com.wiiy.synthesis.action.NoticeAction" scope="prototype">
+		<property name="noticeService" ref="noticeService"></property>
+		<property name="userNoticeService" ref="userNoticeService"></property>
+		<property name="noticeAttService" ref="noticeAttService"></property>
+	</bean>
+	
+	<bean id="noticeAttDao" class="com.wiiy.synthesis.dao.NoticeAttDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="noticeAttService" class="com.wiiy.synthesis.service.impl.NoticeAttServiceImpl">
+		<property name="noticeAttDao" ref="noticeAttDao"></property>
+	</bean>
+	<bean id="noticeAttAction" class="com.wiiy.synthesis.action.NoticeAttAction" scope="prototype">
+		<property name="noticeAttService" ref="noticeAttService"></property>
+	</bean>
+	<bean id="userNoticeDao" class="com.wiiy.synthesis.dao.UserNoticeDao">
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+	<bean id="userNoticeService" class="com.wiiy.synthesis.service.impl.UserNoticeServiceImpl">
+		<property name="userNoticeDao" ref="userNoticeDao"></property>
+	</bean>
+	<bean id="userNoticeAction" class="com.wiiy.synthesis.action.UserNoticeAction" scope="prototype">
+		<property name="userNoticeService" ref="userNoticeService"></property>
+	</bean>
+</beans>

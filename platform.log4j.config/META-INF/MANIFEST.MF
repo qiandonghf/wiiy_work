@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: platform.log4j.bundle
+Bundle-SymbolicName: platform.log4j.config
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: wiiy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Fragment-Host: org.springframework.osgi.log4j.osgi

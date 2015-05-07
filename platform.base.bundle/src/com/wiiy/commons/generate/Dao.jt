@@ -1,0 +1,13 @@
+package ${parentPackage}.dao;
+
+import com.wiiy.hibernate.BaseDao;
+<#list importPackages as importPackage> 
+import ${importPackage};
+</#list>
+
+/**
+ * @author my
+ */
+public class ${className}Dao extends BaseDao<${className}>{
+
+}
